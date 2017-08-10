@@ -9,11 +9,11 @@ class Groups extends MY_Controller
         parent::__construct();
         session_start();
         $_SESSION["RF"]["subfolder"] = "flags";
-      
+
     }
     public function index()
     {
-      
+
         $data = array(
             'res' => $this->web->getDataAll(GROUPS,$this->input->post('search_keyword'),array('groupusers_name')),
             'msg' => $this->session->tempdata('msg'),
@@ -32,7 +32,7 @@ public function add()
      extract($post);
 
      if($this->web->CheckData(GROUPS,array('groupusers_name'=>$group_name))>0){
-    $this->session->set_tempdata('error', 'มีกลุ่มผู้ใช้นี้อยู่แล้วค่ะ!', 3);    
+    $this->session->set_tempdata('error', 'มีกลุ่มผู้ใช้นี้อยู่แล้วค่ะ!', 3);
     redirect(base_url('mt-admin/'.$this->uri->segment(2).'/'.$this->uri->segment(3)),'refresh');
     }else{
      $ins=array(
@@ -41,19 +41,19 @@ public function add()
      'active' => $status=='on'?0:1,
 
       );
-     
+
      $id=$this->web->insertData(GROUPS,$ins);
 
      if(!empty($id)){
 
          if(!empty($save)){
-         $this->session->set_tempdata('msg', 'บันทึกข้อมูลเรียบร้อย', 3);    
+         $this->session->set_tempdata('msg', 'บันทึกข้อมูลเรียบร้อย', 3);
          redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');
-         
+
          }else{
-         $this->session->set_tempdata('msg', 'บันทึกข้อมูลเรียบร้อย', 3);    
-         redirect(base_url('mt-admin/'.$this->uri->segment(2).'/edit/'.$id),'refresh'); 
-         
+         $this->session->set_tempdata('msg', 'บันทึกข้อมูลเรียบร้อย', 3);
+         redirect(base_url('mt-admin/'.$this->uri->segment(2).'/edit/'.$id),'refresh');
+
          }
 
      }
@@ -88,7 +88,8 @@ public function edit($id)
          //print_r($this->input->post());
          foreach ($M as $key => $value) {
 
-  
+echo "test";
+
          }
 
          if(!empty($save)){
@@ -126,17 +127,17 @@ public function action()
             if(count($del)>0){
                 foreach ($del as $key => $value) {
                  if($this->web->deleteData(GROUPS,array('groupusers_id' =>$value))>0){
-                 $this->session->set_tempdata('msg', 'ลบข้อมูลเรียบร้อย', 3);     
+                 $this->session->set_tempdata('msg', 'ลบข้อมูลเรียบร้อย', 3);
                  }
 
                 }
-                 redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');     
+                 redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');
             }else{
-                 redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');  
+                 redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');
             }
         }
         }else{
-           redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');  
+           redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');
         }
     }
    //echo "DELETE";
@@ -146,13 +147,13 @@ public function delete($id)
 {
 
    if($this->web->deleteData(GROUPS,array('groupusers_id' =>$id))>0){
-         $this->session->set_tempdata('msg', 'ลบข้อมูลเรียบร้อย', 3); 
-   
-    redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');     
+         $this->session->set_tempdata('msg', 'ลบข้อมูลเรียบร้อย', 3);
+
+    redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');
 
    }else{
-      $this->session->set_tempdata('error', 'ไม่สามารถลบข้อมูลได้ค่ะ!', 3);  
-      redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh'); 
+      $this->session->set_tempdata('error', 'ไม่สามารถลบข้อมูลได้ค่ะ!', 3);
+      redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');
    }
 }
 
@@ -160,7 +161,7 @@ public function status($id)
 {
 
    if($this->web->updateData(GROUPS,array('active'=>$this->input->get('status')),array('groupusers_id'=>$id))){
-    redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');     
+    redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');
 
    }
 }
