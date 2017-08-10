@@ -81,30 +81,28 @@ public function edit($id)
      'active' => $status=='on'?0:1,
 
       );
-     
+
 
      if($this->web->updateData(GROUPS,$ins,array('groupusers_id'=>$id))){
 
          //print_r($this->input->post());
          foreach ($M as $key => $value) {
 
-             echo "TEst";
-
- 
+  
          }
 
          if(!empty($save)){
-         $this->session->set_tempdata('msg', 'แก้ไขข้อมูลเรียบร้อย', 3);    
+         $this->session->set_tempdata('msg', 'แก้ไขข้อมูลเรียบร้อย', 3);
         // redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');
-         
+
          }else{
-         $this->session->set_tempdata('msg', 'แก้ไขข้อมูลเรียบร้อย', 3);    
-        // redirect(base_url('mt-admin/'.$this->uri->segment(2).'/'.$this->uri->segment(3).'/'.$id),'refresh');   
-         
+         $this->session->set_tempdata('msg', 'แก้ไขข้อมูลเรียบร้อย', 3);
+        // redirect(base_url('mt-admin/'.$this->uri->segment(2).'/'.$this->uri->segment(3).'/'.$id),'refresh');
+
          }
 
      }
-    
+
 
   }
 
