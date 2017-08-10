@@ -85,8 +85,11 @@ public function edit($id)
 
      if($this->web->updateData(GROUPS,$ins,array('groupusers_id'=>$id))){
 
-         print_r($this->input->post());
+         //print_r($this->input->post());
          foreach ($M as $key => $value) {
+
+
+             
             
          }
 
