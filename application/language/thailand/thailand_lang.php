@@ -1,0 +1,10 @@
+<?php
+$lang['menu']='เมนู';
+$lang['apply']='ทำงาน';
+$lang['save']='บันทึก';
+$lang['select']='เลือก';
+$lang['delete']='ลบ';
+$lang['add']='เพิ่มข้อมูล';
+$lang['link']='ลิ้ง';
+$lang['status']='สถานะ';
+$lang['users']='ผู้ใช้งาน';
