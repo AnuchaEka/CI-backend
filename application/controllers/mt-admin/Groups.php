@@ -88,9 +88,9 @@ public function edit($id)
          //print_r($this->input->post());
          foreach ($M as $key => $value) {
 
+             echo "TEst";
 
-             
-            
+ 
          }
 
          if(!empty($save)){
