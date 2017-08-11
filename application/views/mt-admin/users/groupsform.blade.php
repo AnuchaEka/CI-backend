@@ -55,7 +55,7 @@
 
                                                 @foreach($qr as $menu)
                                                 <label class="mt-checkbox mt-checkbox-outline" > {{$menu['menu_name_'.$session->userdata('configlang')]}}
-                                                        <input type="checkbox" name="M[]" value="{{$menu['menu_id']}}" onclick="chked(this)">
+                                                        <input type="checkbox" name="M[]" value="{{$menu['menu_id']}}" onclick="chked(this)" {{$web->checkedrole(PERMISION,array('groupusers_id'=>$res->groupusers_id,'menu_id'=>$menu['menu_id']))}}>
                                                         <span></span>
                                                     </label>
 
@@ -67,7 +67,7 @@
                                                 @if(count($qrsub)>0)
                                                 @foreach($qrsub as $submenu)
                                                 <label class="mt-checkbox mt-checkbox-outline level-1">{{$submenu['menu_name_'.$session->userdata('configlang')]}}
-                                                        <input type="checkbox" disabled value="{{$submenu['menu_id']}}" name="S[{{$menu['menu_id']}}][]" class="S{{$menu['menu_id']}}">
+                                                        <input type="checkbox"  value="{{$submenu['menu_id']}}" name="S[{{$menu['menu_id']}}][]" class="S{{$menu['menu_id']}}" {{$web->checkedrole(PERMISION,array('groupusers_id'=>$res->groupusers_id,'menu_id'=>$submenu['menu_id']))}} {{$web->disablerole(PERMISION,array('groupusers_id'=>$res->groupusers_id,'menu_id'=>$menu['menu_id']))}}>
                                                         <span></span>
                                                     </label>
                                                @endforeach
@@ -75,9 +75,6 @@
 
                                                 @endforeach    
                                             </div>
-
-                                       
-
 
                                         </div>
                                     </div>
@@ -100,6 +97,7 @@
 
                     </div>
                 </div>
+
                 <div class="portlet-title">
 
                     <div class="actions btn-set">

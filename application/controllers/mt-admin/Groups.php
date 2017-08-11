@@ -46,6 +46,22 @@ public function add()
 
      if(!empty($id)){
 
+            $this->web->deleteData(PERMISION,array('groupusers_id' =>$id));
+        if(count($M)>0){
+         foreach ($M as $key => $value) {
+
+             $this->web->insertData(PERMISION,array('groupusers_id'=>$id,'menu_id'=>$value,'menu_type'=>'M'));
+        if(count($S[$value])>0){
+             foreach ($S[$value] as $key2 => $value2) {
+
+                 $this->web->insertData(PERMISION,array('groupusers_id'=>$id,'menu_id'=>$value2,'menu_type'=>'S'));
+             }
+        }
+
+         }
+        }
+        
+
          if(!empty($save)){
          $this->session->set_tempdata('msg', 'บันทึกข้อมูลเรียบร้อย', 3);
          redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');
@@ -86,19 +102,29 @@ public function edit($id)
      if($this->web->updateData(GROUPS,$ins,array('groupusers_id'=>$id))){
 
          //print_r($this->input->post());
+        $this->web->deleteData(PERMISION,array('groupusers_id' =>$id));
+        if(count($M)>0){
          foreach ($M as $key => $value) {
 
-echo "test";
+             $this->web->insertData(PERMISION,array('groupusers_id'=>$id,'menu_id'=>$value,'menu_type'=>'M'));
+        if(count($S[$value])>0){
+             foreach ($S[$value] as $key2 => $value2) {
+
+                 $this->web->insertData(PERMISION,array('groupusers_id'=>$id,'menu_id'=>$value2,'menu_type'=>'S'));
+             }
+        }
 
          }
-
+        }
+        
+    
          if(!empty($save)){
          $this->session->set_tempdata('msg', 'แก้ไขข้อมูลเรียบร้อย', 3);
-        // redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');
+         redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');
 
          }else{
          $this->session->set_tempdata('msg', 'แก้ไขข้อมูลเรียบร้อย', 3);
-        // redirect(base_url('mt-admin/'.$this->uri->segment(2).'/'.$this->uri->segment(3).'/'.$id),'refresh');
+         redirect(base_url('mt-admin/'.$this->uri->segment(2).'/'.$this->uri->segment(3).'/'.$id),'refresh');
 
          }
 

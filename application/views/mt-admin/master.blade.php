@@ -371,9 +371,11 @@
             if ($(obj).prop('checked')) {
 
                 $('.S' + $(obj).val()).prop('disabled', false);
+                $('.S' + $(obj).val()).prop('checked',true);
 
             } else {
                 $('.S' + $(obj).val()).prop('disabled', true);
+                $('.S' + $(obj).val()).prop('checked', false);
 
             }
 

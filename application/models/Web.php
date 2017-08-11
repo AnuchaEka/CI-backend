@@ -152,6 +152,28 @@ public function __construct()
     return $data;
 }
 
+public function checkedrole($table,$obj)
+{
+   $this->db->where($obj);
+    $query = $this->db->get($table);
+    if($query->num_rows()>0){
+    return "checked";
+    }else{
+    return "";
+    }
+}
+
+public function disablerole($table,$obj)
+{
+   $this->db->where($obj);
+    $query = $this->db->get($table);
+    if($query->num_rows()>0){
+    return "";
+    }else{
+    return "disabled";
+    }
+}
+
 }
 
 /* End of file ModelName.php */
