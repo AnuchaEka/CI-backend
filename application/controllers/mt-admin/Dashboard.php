@@ -18,7 +18,7 @@ class Dashboard extends MY_Controller
             'ac'=>'1',
             'sac'=>''
         );
-        echo $this->blade->view()->make('mt-admin.users.groups', $data)->render();
+        echo $this->blade->view()->make('mt-admin.dashboard', $data)->render();
     }
 
 }
