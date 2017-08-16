@@ -6,49 +6,47 @@ class Login extends MY_Controller
     public function __construct()
     {
         parent::__construct();
-    $this->load->library('bcrypt');
+
+      
 
     }
 
     public function index()
     {
 
+       if ($this->auth->loggedin()) {
+        redirect(base_url('mt-admin/dashboard'),'refresh');
+        }
+
+
        if($post=$this->input->post()){
         extract($post);
 
-        $res=$this->web->getDataOne(USERS,array('username'=>$username));
-        
-        if($res){
+        if ($this->input->post('username') && $this->input->post('password')) {
+            $remember = $this->input->post('remember') ? TRUE : FALSE;
+            
+            // get user from database
+            $this->load->model('user_model');
+            $user = $this->user_model->get('username', $this->input->post('username'));
 
-         if ($this->bcrypt->check_password($password, $res->password))
-        {
-           $array=array(
-            'userid'=>$res->id,
-            'usergroup'=>$res->group_id,
-            'userparent'=>$res->parent,
-           );
-    
+            if ($user) {
+                // compare passwords
+                if ($this->user_model->check_password($this->input->post('password'), $user['password'])) {
 
-           $this->session->set_userdata($array);
-           redirect(base_url('mt-admin/dashboard'),'refresh');
-
+                    
+                    // mark user as logged in
+                     $this->auth->login($user['id'], $remember);
+                    redirect(base_url('mt-admin/dashboard'),'refresh');
+                } else {
+                    $this->session->set_tempdata('error', 'รหัสผ่านไม่ถูกต้องค่ะ!', 3);
+                    redirect(base_url('mt-admin'),'refresh');
+                }
+            } else {
+                $this->session->set_tempdata('error', 'ชื่อผู้ใช้งานไม่ถูกต้องค่ะ!', 3);
+                redirect(base_url('mt-admin'),'refresh');
+            }
         }
-        else
-        {
-           $this->session->set_tempdata('error', 'รหัสผ่านไม่ถูกต้องค่ะ!', 3);
-          redirect(base_url('mt-admin'),'refresh');
-        }   
-
-        }else{
-          $this->session->set_tempdata('error', 'ชื่อผู้ใช้งานไม่ถูกต้องค่ะ!', 3);
-          redirect(base_url('mt-admin'),'refresh');
-        }
-
-
-        //echo $this->bcrypt->hash_password($password);
-       }
-
-       
+    }
 
         $data = array(
             'msg' => $this->session->tempdata('msg'),
@@ -56,10 +54,10 @@ class Login extends MY_Controller
          );
 
            echo $this->blade->view()->make('mt-admin.users.login', $data)->render();
-    }
+  
+}
 
-    public function chklogin()
-    {
-       echo "text";
-    }
+   
+
+
 }

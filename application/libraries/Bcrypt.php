@@ -277,7 +277,7 @@ class Bcrypt {
 		return '*';
 	}
 
-	public function check_password($password, $stored_hash)
+	public function CheckPassword($password, $stored_hash)
 	{
 		$hash = $this->crypt_private($password, $stored_hash);
 		if ($hash[0] == '*')

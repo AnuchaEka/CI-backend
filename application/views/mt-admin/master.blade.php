@@ -73,7 +73,7 @@
             <!-- BEGIN LOGO -->
             <div class="page-logo">
                 <a href="index.html">
-                        <img src="{{base_url('assets/layouts/layout/img/logo.png')}}" alt="logo" class="logo-default" /> </a>
+                        <img src="{{base_url('assets/media/mountain-logo-w.png')}}" alt="logo" width="165" class="logo-default" /> </a>
                 <div class="menu-toggler sidebar-toggler">
                     <span></span>
                 </div>
@@ -195,7 +195,7 @@
                                         <i class="icon-lock"></i> Lock Screen </a>
                             </li>
                             <li>
-                                <a href="page_user_login_1.html">
+                                <a href="<?=base_url('mt-admin/logout')?>">
                                         <i class="icon-key"></i> ออกจากระบบ </a>
                             </li>
                         </ul>

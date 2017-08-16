@@ -65,8 +65,8 @@ Login page
   padding-left: 9px;
   padding-right: 9px; }
 
-.login .content .forget-form {
-  display: none; }
+/* .login .content .forget-form {
+  display: none; } */
 
 .login .content .register-form {
   display: none; }

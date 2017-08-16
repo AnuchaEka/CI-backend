@@ -7,6 +7,6 @@ define('LANGLABEL', 'mt_general_label');
 define('SETTING', 'mt_settings');
 define('GROUPS', 'mt_groupusers');
 define('PERMISION', 'mt_permision');
-
+define('AUTOLOGIN', 'mt_autologin');
 
 ?>
