@@ -45,8 +45,8 @@
 <body class=" login">
     <!-- BEGIN LOGO -->
     <div class="logo">
-        <a href="index.html">
-                <img src="{{base_url('assets/pages/img/logo-big.png')}}" alt="" /> </a>
+        <a href="{{base_url()}}">
+                <img src="{{base_url('assets/media/mountain-logo-w.png')}}" alt="" /> </a>
     </div>
     <!-- END LOGO -->
     <!-- BEGIN LOGIN -->
@@ -74,27 +74,15 @@
             <div class="form-actions">
                 <button type="submit" class="btn green uppercase">{{$web->getLable('login')}}</button>
                 <label class="rememberme check mt-checkbox mt-checkbox-outline">
-                        <input type="checkbox" name="remember" value="1" />{{$web->getLable('remember')}}
+                        <input type="checkbox" name="remember" value="1" id="remember" />{{$web->getLable('remember')}}
                         <span></span>
                     </label>
-                <a href="javascript:;" id="forget-password" class="forget-password">{{$web->getLable('forgotpassword')}}?</a>
+                <a href="{{base_url('mt-admin/forgotpassword')}}" id="forget-password" class="forget-password">{{$web->getLable('forgotpassword')}}?</a>
             </div>
-            
          
         </form>
         <!-- END LOGIN FORM -->
-        <!-- BEGIN FORGOT PASSWORD FORM -->
-        <form class="forget-form" action="" method="post">
-            <h3 class="font-green">{{$web->getLable('forgotpassword')}}</h3>
-            <p>{{$web->getLable('msg-resetpass')}}</p>
-            <div class="form-group">
-                <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="{{$web->getLable('email')}}" name="email" required />                </div>
-            <div class="form-actions">
-                <button type="button" id="back-btn" class="btn green btn-outline">{{$web->getLable('back')}}</button>
-                <button type="submit" class="btn btn-success uppercase pull-right">{{$web->getLable('submit')}}</button>
-            </div>
-        </form>
-        <!-- END FORGOT PASSWORD FORM -->
+
 
     </div>
     <div class="copyright"> 2017 © BACKEND SYSTEM BY <a href="">MOUNTAIN STUDIO</a> </div>
@@ -120,7 +108,6 @@
     <!-- END THEME GLOBAL SCRIPTS -->
     <!-- BEGIN PAGE LEVEL SCRIPTS -->
 
-    <script src="{{base_url('assets/pages/scripts/login.min.js')}}" type="text/javascript"></script>
     <script src="{{base_url('assets/pages/scripts/form-validation.js')}}" type="text/javascript"></script>
         <script>
         $('form').parsley();

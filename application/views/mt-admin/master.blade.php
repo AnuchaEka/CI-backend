@@ -189,11 +189,7 @@
                                         <span class="badge badge-success"> 7 </span>
                                     </a>
                             </li>
-                            <li class="divider"> </li>
-                            <li>
-                                <a href="page_user_lock_1.html">
-                                        <i class="icon-lock"></i> Lock Screen </a>
-                            </li>
+                          
                             <li>
                                 <a href="<?=base_url('mt-admin/logout')?>">
                                         <i class="icon-key"></i> ออกจากระบบ </a>
@@ -229,7 +225,19 @@
                         <!-- END SIDEBAR TOGGLER BUTTON -->
                     </li>
 
-                    @php $qr=$web->getMenu(); @endphp @foreach($qr as $menu) @php $qrsub=$web->getMenu($menu['menu_id']); @endphp
+                    @php 
+                    
+                    $qr=$web->getMenu(); 
+                    
+                    @endphp 
+                    
+                    @foreach($qr as $menu) 
+                    
+                    @php 
+                    
+                    $qrsub=$web->getMenu($menu['menu_id']); 
+                    
+                    @endphp
                     <li id="menu{{$menu['menu_id']}}" class="@if(empty($menu['menu_url']) or $menu['menu_url']=='#') {{'nav-item'}} @endif">
                         <a href="@if(empty($menu['menu_url']) or $menu['menu_url']=='#') {{'javascript:;'}} @else {{base_url('mt-admin/'.$menu['menu_url'])}} @endif"
                             class="nav-link nav-toggle">

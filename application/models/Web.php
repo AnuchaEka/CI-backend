@@ -64,9 +64,28 @@ public function __construct()
 
   public function getMenu($parent=0)
   {
+    $id = $this->auth->userid();
+    $this->load->model('user_model');
+    $user = $this->user_model->get('id', $id);
 
-    $qr=$this->db->where('menu_parent',$parent)->get(MENUS);
-    return $qr->result_array();
+    if($user['group_id']==0){
+      $qr=$this->db->where('menu_parent',$parent)->get(MENUS);
+      return $qr->result_array();
+    }else{
+      
+      $this->db->select('*');
+      $this->db->from(MENUS.' m'); 
+      $this->db->join(PERMISION.' p', 'p.menu_id=m.menu_id', 'left');
+      $this->db->where('p.groupusers_id',$user['group_id']);
+      $this->db->where('m.menu_parent',$parent);
+      $this->db->order_by('m.menu_sorting','asc');         
+      $query = $this->db->get(); 
+
+      return $query->result_array();
+
+    }
+
+   
 
   }
   
