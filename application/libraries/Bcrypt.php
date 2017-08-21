@@ -242,7 +242,7 @@ class Bcrypt {
 		return $output;
 	}
 
-	public function hash_password($password)
+	public function HashPassword($password)
 	{
 		$random = '';
 
