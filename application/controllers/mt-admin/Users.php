@@ -98,7 +98,13 @@ public function edit($id)
 {
     if($post=$this->input->post()){
      extract($post);
-
+     if($this->web->CheckData(USERS,array('email'=>$txt_email,'id !='=>$id))>0){
+        
+           $this->session->set_tempdata('error', 'อีเมลนี้ถูกใช้อยู่แล้วค่ะ!', 3);
+           redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');
+       
+   
+       }else{   
      $ins=array(
         'name' =>$txt_name, 
         'lastname' =>$txt_lastname, 
@@ -136,6 +142,7 @@ public function edit($id)
          }
 
      }
+    }
 
 
   }
