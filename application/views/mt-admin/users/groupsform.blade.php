@@ -6,10 +6,15 @@
                 <div class="portlet-title">
                     <div class="caption">
                         <i class="icon-user"></i>{{$title}} </div>
-                           <div class="actions btn-set">
-                                           
-   
-                         </div>
+                        @if(sizeof($res)>0)
+                        <div class="actions btn-set">
+                                
+                                    <a href="{{base_url('mt-admin/'.$uri->segment(2).'/add')}}" class="btn default btn-secondary-outline">
+                                        {{$web->getLable('add')}} <i class="fa fa-plus"></i></a>
+                            
+                                
+                    </div>    
+                    @endif 
 
                 </div>
                 <div class="portlet-body">

@@ -75,7 +75,7 @@ class User_model extends CI_Model {
             $where = 'id';
         }
         
-        $user = $this->db->where($where, $value)->get($this->table)->row_array();
+        $user = $this->db->where($where, $value)->where('status', 0)->get($this->table)->row_array();
         return $user;
     }
     

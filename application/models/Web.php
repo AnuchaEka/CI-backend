@@ -12,6 +12,7 @@ public function __construct()
   {
    
      if (!empty($table)) {
+      if(!empty($keyword)){
  
              foreach($fields as $key => $value) {
               if($key == 0) {
@@ -19,7 +20,9 @@ public function __construct()
               } else {
                   $this->db->or_like($value, $keyword);
               }
-          }  
+          }
+        }
+        
 
         $qr=$this->db->get($table);
         if($k==0){
@@ -28,6 +31,18 @@ public function __construct()
         return $qr->result_array();
         }
         
+
+     }
+  }
+
+  public function getDatafields($table,$fields,$object)
+  {
+    
+     if (!empty($table) and !empty($fields)) {
+   
+        $qr=$this->db->where($object)->get($table);
+
+        return $qr->row()->$fields;
 
      }
   }
@@ -69,7 +84,7 @@ public function __construct()
     $user = $this->user_model->get('id', $id);
 
     if($user['group_id']==0){
-      $qr=$this->db->where('menu_parent',$parent)->get(MENUS);
+      $qr=$this->db->where('menu_parent',$parent)->order_by('menu_sorting','asc')->get(MENUS);
       return $qr->result_array();
     }else{
       
@@ -191,6 +206,43 @@ public function disablerole($table,$obj)
     }else{
     return "disabled";
     }
+}
+
+public function do_upload($userfile,$path,$new_name='')
+{
+        $config['file_name']  =$new_name;
+        $config['upload_path']          = $path;
+        $config['allowed_types']        = 'jpeg|jpg|png';
+        $config['overwrite']          = TRUE;
+       //  $config['max_size']             = 1024;
+       // $config['max_width']            = $w;
+        //$config['max_height']           = $h;
+        //$config['encrypt_name'] = FALSE;
+
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+
+        if ( ! $this->upload->do_upload($userfile))
+        {
+          return '';
+          //$this->upload->display_errors();
+        }
+        else
+        {
+             //$data =  $this->upload->data();
+
+             return  $this->upload->data('file_name');
+
+
+        }
+}
+
+public function deleteFiles($path){
+
+    if(is_file($file)){
+      unlink($file); // delete file
+    }
+
 }
 
 }

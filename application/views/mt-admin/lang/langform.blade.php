@@ -8,6 +8,15 @@
                                     <div class="portlet-title">
                                         <div class="caption">
                                             <i class="icon-wrench"></i>{{$title}} </div>
+                                            @if(sizeof($res)>0)
+                                                    <div class="actions btn-set">
+                                                            
+                                                                <a href="{{base_url('mt-admin/'.$uri->segment(2).'/add')}}" class="btn default btn-secondary-outline">
+                                                                    {{$web->getLable('add')}} <i class="fa fa-plus"></i></a>
+                                                        
+                                                            
+                                                </div>    
+                                                @endif       
                                        
                                     </div>
                                     <div class="portlet-body">
@@ -61,7 +70,7 @@
                                                                         <img src="{{$res->lang_img}}"  alt=""  id="image_preview"/> </div>
                                                                     <input id="image_link" name="link" type="hidden" value="{{$res->lang_img}}">
                                                                     <div>
-                                                                    <a class="btn iframe-btn default" type="button" href="{{base_url('assets/filemanager/dialog.php?type=1&field_id=image_link')}}">{{$web->getLable('choose_photo')}}</a>
+                                                                    <a class="btn iframe-btn default" type="button" href="{{base_url('assets/filemanager/dialog.php?type=1&field_id=image_link&fldr=flags')}}">{{$web->getLable('choose_photo')}}</a>
 
                                                                     <a class="btn red" type="button" id="removeimages"  href="javascript:;">{{$web->getLable('delete_photo')}}</a>
 
@@ -73,7 +82,7 @@
                                                                         <img src="" style="display:none;" alt=""  id="image_preview"/> </div>
                                                                     <input id="image_link" name="link" type="hidden" value="">
                                                                     <div>
-                                                                    <a class="btn iframe-btn default" type="button" href="{{base_url('assets/filemanager/dialog.php?type=1&field_id=image_link')}}">{{$web->getLable('choose_photo')}}</a>
+                                                                    <a class="btn iframe-btn default" type="button" href="{{base_url('assets/filemanager/dialog.php?type=1&field_id=image_link&fldr=flags')}}">{{$web->getLable('choose_photo')}}</a>
 
                                                                     <a class="btn red" type="button" id="removeimages" style="display:none;" href="javascript:;">{{$web->getLable('delete_photo')}}</a>
 

@@ -8,10 +8,20 @@
                                     <div class="portlet-title">
                                         <div class="caption">
                                             <i class="icon-wrench"></i>{{$title}} </div>
+                                            @if(sizeof($res)>0)
+                                                    <div class="actions btn-set">
+                                                            
+                                                                <a href="{{base_url('mt-admin/'.$uri->segment(2).'/add')}}" class="btn default btn-secondary-outline">
+                                                                    {{$web->getLable('add')}} <i class="fa fa-plus"></i></a>
+                                                        
+                                                            
+                                                </div>    
+                                                @endif
                                             <div class="actions btn-set">
                                              @include('mt-admin.lang.langselect')
    
                                         </div>
+                                        
                                        
                                     </div>
                                     <div class="portlet-body">

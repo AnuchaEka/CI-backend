@@ -34,6 +34,8 @@ class MY_Controller extends CI_Controller
             $view->with("uri", $this->uri);
             $view->with("lang", $this->lang);
             $view->with("web", $this->web);
+            $view->with("input", $this->input);
+            $view->with("authen", $this->auth);
             
         });
     }

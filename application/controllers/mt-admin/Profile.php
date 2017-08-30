@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Users extends MY_Controller
+class Profile extends MY_Controller
 {
 
    public function __construct()
@@ -20,10 +20,10 @@ class Users extends MY_Controller
             'msg' => $this->session->tempdata('msg'),
             'error' => $this->session->tempdata('error'),
             'title' => 'ผู้ใช้งานทั้งหมด',
-            'ac'=>'8',
-            'sac'=>'23'
+            'ac'=>'',
+            'sac'=>''
         );
-        echo $this->blade->view()->make('mt-admin.users.users', $data)->render();
+        echo $this->blade->view()->make('mt-admin.users.profile', $data)->render();
     }
 
 public function add()

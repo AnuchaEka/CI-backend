@@ -1,5 +1,14 @@
 @php defined('BASEPATH') OR exit('No direct script access allowed'); @endphp
+@php
+if (!$authen->loggedin()) {
+      redirect(base_url('mt-admin'));
+ }else{
+        $id = $authen->userid();
+        
+        $user = $web->getDataOne(USERS,array('id'=>$id)); 
+ }
 
+@endphp
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
@@ -46,6 +55,7 @@
     <link href="{{base_url('assets/global/css/plugins.css')}}" rel="stylesheet" type="text/css" />
     <!-- END THEME GLOBAL STYLES -->
     <!-- BEGIN THEME LAYOUT STYLES -->
+     <link href="{{base_url('assets/pages/css/profile.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{base_url('assets/layouts/layout/css/layout.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{base_url('assets/layouts/layout/css/themes/darkblue.css')}}" rel="stylesheet" type="text/css" id="style_color"
     />
@@ -164,13 +174,13 @@
                     <!-- BEGIN USER LOGIN DROPDOWN -->
                     <li class="dropdown dropdown-user">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                <img alt="" class="img-circle" src="{{base_url('assets/layouts/layout/img/avatar3_small.jpg')}}" />
-                                <span class="username username-hide-on-mobile"> Nick </span>
+                                <img alt="" class="img-circle" src="{{base_url('assets/profiles/'.$user->avatar)}}" />
+                                <span class="username username-hide-on-mobile"> {{$user->name.' '.$user->lastname}} </span>
                                 <i class="fa fa-angle-down"></i>
                             </a>
                         <ul class="dropdown-menu dropdown-menu-default">
                             <li>
-                                <a href="page_user_profile_1.html">
+                                <a href="{{base_url('mt-admin/profile')}}">
                                         <i class="icon-user"></i> ข้อมูลส่วนตัว </a>
                             </li>
                             <li>
