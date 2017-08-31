@@ -98,6 +98,13 @@ if (!$authen->loggedin()) {
             <div class="top-menu">
                 <ul class="nav navbar-nav pull-right">
                     <!-- BEGIN INBOX DROPDOWN -->
+                    <li class="dropdown dropdown-extended dropdown-inbox">
+                        <a href="{{base_url()}}" class="dropdown-toggle">
+                                <i class="icon-home"></i>
+                       
+                            </a>
+                    
+                    </li>
                     <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                                 <i class="icon-envelope-open"></i>
