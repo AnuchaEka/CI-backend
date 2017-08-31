@@ -36,7 +36,7 @@ class MY_Controller extends CI_Controller
             $view->with("web", $this->web);
             $view->with("input", $this->input);
             $view->with("authen", $this->auth);
-            
+            $view->with("func", $this->func);
         });
     }
 }
