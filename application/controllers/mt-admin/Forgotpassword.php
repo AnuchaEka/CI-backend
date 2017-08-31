@@ -98,8 +98,8 @@ $this->load->library('email');
       'protocol'  => 'smtp',
       'smtp_host' => 'ssl://smtp.googlemail.com',
       'smtp_port' => 465,
-      'smtp_user' => 'keadipot@gmail.com',
-      'smtp_pass' => 'admin1990',
+      'smtp_user' => 'Your Gmail address',
+      'smtp_pass' => 'Your Gmail password',
       'mailtype'  => 'html',
       'charset'   => 'utf-8'
   );
