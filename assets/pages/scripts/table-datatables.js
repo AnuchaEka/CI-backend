@@ -13,19 +13,19 @@ var TableDatatablesManaged = function () {
                     "sortDescending": ": activate to sort column descending"
                 },
                 "emptyTable": "ไม่มีข้อมูล",
-                "info": "แสดง _START_ ถึง _END_ จาก _TOTAL_ รายการ",
+                "info": "",
                 "infoEmpty": "ไม่พบรายการ",
                 "infoFiltered": "(filtered1 from _MAX_ total records)",
                 "lengthMenu": "Show _MENU_",
                 "search": "Search:",
                 "zeroRecords": "No matching records found",
                 "paginate": {
-                    "previous":"Prev",
-                    "next": "Next",
-                    "last": "Last",
-                    "first": "First",
-                    "page": "หน้า",
-                    "pageOf": "จาก"
+                    "previous":"ก่อนหน้า",
+                    "next": "ถัดไป",
+                    "last": "สุดท้าย",
+                    "first": "ก่อน",
+                    "page": "",
+                    "pageOf": ""
                 }
             },
             "bStateSave": true,

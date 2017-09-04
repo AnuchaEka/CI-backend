@@ -24,13 +24,29 @@ public function __construct()
         }
         
 
-        $qr=$this->db->get($table);
+        $qr=$this->db->order_by('timestamp_create','desc')->get($table);
         if($k==0){
         return $qr->result();
         }else{
         return $qr->result_array();
         }
         
+
+     }
+  }
+
+
+  public function getDataWhere($table,$object=null,$k=0)
+  {
+   
+     if (!empty($table)) {
+ 
+        $qr=$this->db->where($object)->order_by('timestamp_create','desc')->get($table);
+         if($k==0){
+        return $qr->result();
+        }else{
+        return $qr->result_array();
+        }
 
      }
   }
@@ -43,21 +59,6 @@ public function __construct()
         $qr=$this->db->where($object)->get($table);
 
         return $qr->row()->$fields;
-
-     }
-  }
-
-  public function getDataWhere($table,$object=null,$k=0)
-  {
-   
-     if (!empty($table)) {
- 
-        $qr=$this->db->where($object)->get($table);
-         if($k==0){
-        return $qr->result();
-        }else{
-        return $qr->result_array();
-        }
 
      }
   }
@@ -170,7 +171,7 @@ public function __construct()
   {
     $qr=$this->db->where('name',$key)->get(LANGLABEL);
     $rs=$qr->row_array();
-    return $rs['lang_'.$this->session->userdata('configlang')];
+    return $rs['lang_'.$this->session->userdata('weblang')];
   }
 
 
@@ -237,12 +238,22 @@ public function do_upload($userfile,$path,$new_name='')
         }
 }
 
-public function deleteFiles($path){
+public function deleteFiles($file){
 
     if(is_file($file)){
       unlink($file); // delete file
+      return true;
+    }else{
+      return false;
     }
 
+}
+
+public function getmenuLable($id)
+{
+  $qr=$this->db->where('menu_id',$id)->get(MENUS);
+  $res=$qr->row_array();
+  return $res['menu_name_'.$this->session->weblang];
 }
 
 }

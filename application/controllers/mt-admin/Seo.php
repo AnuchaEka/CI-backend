@@ -22,12 +22,12 @@ class Seo extends MY_Controller
             
             );   
         if($this->web->updateData(SETTING,$ins,array('settings_id' => 1))){   
-         $this->session->set_tempdata('msg', 'บันทึกข้อมูลเรียบร้อย', 10);    
+         $this->session->set_tempdata('msg', $this->web->getLable('msg_save'), 10);    
          redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');
          }   
         }
         $data = array(
-            'title' => 'SEO',
+            'title' => $this->web->getmenuLable(36),
             'res' => $this->web->getDataOne(SETTING,array('settings_id' =>1)),
             'msg' => $this->session->tempdata('msg'),
             'ac'=>'11',

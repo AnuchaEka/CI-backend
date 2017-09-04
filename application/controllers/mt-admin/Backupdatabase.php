@@ -16,7 +16,7 @@ class Backupdatabase extends MY_Controller
             'res' => $this->web->getDataAll(BACKUPDB,$this->input->post('search_keyword'),array('backup_filename')),
             'msg' => $this->session->tempdata('msg'),
             'error' => $this->session->tempdata('error'),
-            'title' => 'สำรองฐานข้อมูล',
+            'title' => $this->web->getmenuLable(39),
             'ac'=>'11',
             'sac'=>'39'
         );
@@ -34,7 +34,7 @@ class Backupdatabase extends MY_Controller
         $db_name = 'backup-on-'. date("Y-m-d-H-i-s") .'.zip';
         $ins= array(
             'backup_filename' => $db_name, 
-            'backup_date' => date('Y-m-d H:i:s')
+            'timestamp_create' => date('Y-m-d H:i:s')
         );  
         $id=$this->web->insertData(BACKUPDB,$ins);
 
@@ -64,7 +64,7 @@ class Backupdatabase extends MY_Controller
                     foreach ($del as $key => $value) {
                       $this->deletefile($value);      
                      if($this->web->deleteData(BACKUPDB,array('id' =>$value))>0){
-                        $this->session->set_tempdata('msg', 'ลบข้อมูลเรียบร้อย', 3);
+                        $this->session->set_tempdata('msg',$this->web->getLable('msg_delete'), 3);
                      }
     
                     }
@@ -86,11 +86,11 @@ class Backupdatabase extends MY_Controller
        if($this->web->deleteData(BACKUPDB,array('id' =>$id))>0){
 
             $this->deletefile($id);
-            $this->session->set_tempdata('msg', 'ลบข้อมูลเรียบร้อย', 3);
+            $this->session->set_tempdata('msg', $this->web->getLable('msg_delete'), 3);
             redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');
     
        }else{
-          $this->session->set_tempdata('error', 'ไม่สามารถลบข้อมูลได้ค่ะ!', 3);
+          $this->session->set_tempdata('error', $this->web->getLable('error_delete'), 3);
           redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');
        }
     }

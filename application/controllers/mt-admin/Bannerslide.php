@@ -1,14 +1,12 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Lang extends MY_Controller
+class Bannerslide extends MY_Controller
 {
 
    public function __construct()
     {
         parent::__construct();
-        session_start();
-        $_SESSION["RF"]["subfolder"] = "flags";
       
     }
     public function index()
@@ -18,11 +16,11 @@ class Lang extends MY_Controller
             'res' => $this->web->getDataAll(LANG,$this->input->post('search_keyword'),array('lang_iso','lang_name','country')),
             'msg' => $this->session->tempdata('msg'),
             'error' => $this->session->tempdata('error'),
-            'title' => $this->web->getmenuLable(33),
-            'ac'=>'11',
-            'sac'=>'33'
+            'title' => $this->web->getmenuLable(31),
+            'ac'=>'10',
+            'sac'=>'31'
         );
-        echo $this->blade->view()->make('mt-admin.lang.lang', $data)->render();
+        echo $this->blade->view()->make('mt-admin.layouts.bannerslide', $data)->render();
     }
 
 public function add()
@@ -50,24 +48,6 @@ public function add()
 
      if(!empty($id)){
 
-              $fields = array(
-                    'lang_'.$lang_code => array(
-                        'type' => 'VARCHAR',
-                        'constraint' => '250',
-                        'null' => TRUE,
-                ),
-        );
-              $menus = array(
-                    'menu_name_'.$lang_code => array(
-                        'type' => 'VARCHAR',
-                        'constraint' => '250',
-                        'null' => TRUE,
-                ),
-        );
-        
-        $this->web->AddColumn(MENUS,$menus);    
-        $this->web->AddColumn(LANGLABEL,$fields);
-
          if(!empty($save)){
          $this->session->set_tempdata('msg', $this->web->getLable('msg_save'), 3);    
          redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');
@@ -83,7 +63,7 @@ public function add()
   //print_r($this->input->post());
   }
     $data = array(
-            'title' => $this->web->getmenuLable(33),
+            'title' => 'เพิ่มภาษา',
             'error' => $this->session->tempdata('error'),
             'msg' => $this->session->tempdata('msg'),
             'ac'=>'11',
@@ -110,28 +90,7 @@ public function edit($id)
 
      if($this->web->updateData(LANG,$ins,array('lang_iso_id'=>$id))){
 
-              $fields = array(
-                    'lang_'.$lang_oldcode => array(
-                        'name' => 'lang_'.$lang_code,
-                        'type' => 'VARCHAR',
-                        'constraint' => '250',
-                        'null' => TRUE
-                ),
-        );
-
-          $menus = array(
-                    'menu_name_'.$lang_oldcode => array(
-                        'name' => 'menu_name_'.$lang_code,
-                        'type' => 'VARCHAR',
-                        'constraint' => '250',
-                        'null' => TRUE
-                ),
-        );
-
-        $this->web->ModifyColumn(MENUS,$menus);
-        $this->web->ModifyColumn(LANGLABEL,$fields);
-
-         if(!empty($save)){
+            if(!empty($save)){
          $this->session->set_tempdata('msg', $this->web->getLable('msg_edit'), 3);    
          redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');
          
@@ -148,7 +107,7 @@ public function edit($id)
 
     $data = array(
             'res' => $this->web->getDataOne(LANG,array('lang_iso_id' =>$id)),
-            'title' => $this->web->getmenuLable(33),
+            'title' => 'แก้ไขภาษา',
             'msg' => $this->session->tempdata('msg'),
             'ac'=>'11',
             'sac'=>'33'

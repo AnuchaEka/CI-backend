@@ -80,7 +80,7 @@
                                                   </td>
                                              
                                                 <td>
-                                                   {{$func->sysDatetime($val->backup_date)}}
+                                                   {{$func->sysDatetime($val->timestamp_create)}}
                                                 </td>
                                                
                                                 <td class="text-center">

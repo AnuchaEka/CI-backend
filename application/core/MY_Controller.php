@@ -22,13 +22,21 @@ class MY_Controller extends CI_Controller
         //  }else{
         //    $this->lang->load($language,$language);
         //  }
-       if(!empty($_GET['lang'])){
+        $weblang=$this->web->getDatafields(SETTING,'admin_lang',array('settings_id'=>1));
+        $this->session->set_userdata('weblang',$this->web->getDatafields(LANG,'lang_iso',array('lang_iso_id'=>$weblang))); 
+
+
+        $language=$this->session->userdata('configlang');
+        if(empty($language)){
+            $this->session->set_userdata('configlang','th');   
+        }else if(!empty($_GET['lang'])){
             $this->session->set_userdata('configlang',$_GET['lang']); 
             
-           }else{
-            $this->session->set_userdata('configlang','th'); 
+       }else{
+
+       $this->session->set_userdata('configlang', $language); 
              
-           }
+       }
  
             $view->with("session", $this->session);
             $view->with("uri", $this->uri);

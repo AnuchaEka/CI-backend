@@ -10,8 +10,6 @@
                                         <div class="caption">
                                             <i class="icon-wrench"></i> {{$title}} </div>
                                         <div class="actions btn-set">
-
-                                        @include('mt-admin.lang.langselect')
                                             <a href="{{base_url('mt-admin/'.$uri->segment(2).'/add')}}" class="btn default btn-secondary-outline">
                                                 {{$web->getLable('add')}} <i class="fa fa-plus"></i></a>
                                     
@@ -33,7 +31,7 @@
 
                                         
 
-                                 <div class="table-container">
+                                          <div class="table-container">
                                     <div class="pull-right">
                                          <form action="" method="post">
                                            <input type="text" class=" form-control input-inline input-small input-sm" name="search_keyword" value="{{$_POST['search_keyword']}}">
@@ -43,67 +41,56 @@
    
                                          </div>
                                          <form class="form-horizontal form-row-seperated" action="{{base_url('mt-admin/'.$uri->segment(2).'/action')}}" method="post">       
-                                       
+                                        <div >
+                                          <select class=" form-control input-inline input-small input-sm" name="action">
+                                                <option value="">--{{$web->getLable('select')}}--</option>
+                                                <option value="Del">{{$web->getLable('delete')}}</option>
+                                            </select>
+                                            <button class="btn btn-sm default table-group-action-submit" data-toggle="confirmation"  data-popout="true" data-placement="right" data-title="{{$web->getLable('confirm_delete')}}"  data-btn-cancel-label="{{$web->getLable('no')}}" data-btn-ok-label="{{$web->getLable('yes')}}" type="submit">
+                                                 {{$web->getLable('apply')}}</button> 
+                                          
+                                        </div>
                   
                                         <table class="table table-bordered table-checkable order-column" id="sample_2">
                                         <thead>
                                             <tr>
-                                                <th> #ID </th>
-                                                <th> {{$web->getLable('label_name')}} </th>
-                                                <th> {{$web->getLable('text_name')}} </th>
-                                                <th> {{$web->getLable('status')}} </th>
-                                                <th style="width:15%"> &nbsp;</th>     
+                                                <th class="table-checkbox" width="10%">
+                                                    <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                                        <input type="checkbox" class="group-checkable" data-set="#sample_2 .checkboxes" />
+                                                        <span></span>
+                                                    </label>
+                                                </th>
+                                                <th> {{$web->getLable('image')}} </th>
+                                                <th> {{$web->getLable('link')}} </th>
+                                                <th style="width:15%"> &nbsp;</th> 
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @php
-                                                    $n=1;
-                                                    @endphp
                                             @foreach($res as $val)
                                             <tr >
-                                                 <td>
-                                                    {{$n}}
+                                                <td>
+                                                    <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                                        <input type="checkbox" name="del[]" class="checkboxes" value="{{$val->lang_iso_id}}" />
+                                                        <span></span>
+                                                    </label>
                                                 </td>
                                                 <td>
-                                                    <a href="{{base_url('mt-admin/'.$uri->segment(2).'/edit/'.$val['general_label_id'])}}"> {{$val['name']}} </a> 
-                                                    
+                                                    <img src="{{$val->lang_img}}" alt="" width="25"> 
                                                 </td>
                                                 <td>
-                                                   {{$val['lang_'.$session->userdata('configlang')]}}
-                                                    
-                                                </td>
-                                                <td>
-                                                    @php
-                                                    $i=1;
-                                                    @endphp
-
-                                                    @foreach($reslang as $rslable)
-
-                                                    @if($i!=1) {{','}} @endif
-
-                                                    @if(!empty($val['lang_'.$rslable->lang_iso]))
-                                                    <lable class="font-green-sharp"> {{$rslable->lang_name}} </lable>
-                                                    @else
-                                                    <lable class="font-red-mint">{{$rslable->lang_name}} </lable>
-                                                    @endif
-
-                                                    @php
-                                                    $i++;
-                                                    @endphp
-
-                                                    @endforeach
-                                                    {{$val->lang_iso}}
-                                                </td>
-                                                   <td class="text-center">
-                                                   <a href="{{base_url('mt-admin/'.$uri->segment(2).'/edit/'.$val['general_label_id'])}}" class="btn btn-outline btn-circle btn-xs dark">
+                                                    <a href="{{base_url('mt-admin/'.$uri->segment(2).'/edit/'.$val->lang_iso_id)}}"> {{$val->lang_name}} </a> 
+                                                    @if($val->lang_default==1) 
+                                                    <i class="fa fa-lock"></i>
+                                                     @endif
+                                                  </td>
+                                                                    
+                                                <td class="text-center">
+                                                   <a href="{{base_url('mt-admin/'.$uri->segment(2).'/edit/'.$val->lang_iso_id)}}" class="btn btn-outline btn-circle btn-xs dark">
                                                       <i class="fa fa-edit"></i> {{$web->getlable('edit')}} </a>
-                                                   <a href="{{base_url('mt-admin/'.$uri->segment(2).'/delete/'.$val['general_label_id'])}}" class="btn btn-outline btn-circle red btn-xs blue" data-toggle="confirmation"  data-popout="true" data-placement="left" data-singleton="true" data-title="{{$web->getLable('confirm_delete')}}"  data-btn-cancel-label="{{$web->getLable('no')}}" data-btn-ok-label="{{$web->getLable('yes')}}">
+                                                   <a href="{{base_url('mt-admin/'.$uri->segment(2).'/delete/'.$val->lang_iso_id)}}" class="btn btn-outline btn-circle red btn-xs blue" data-toggle="confirmation"  data-popout="true" data-placement="left" data-singleton="true" data-title="{{$web->getLable('confirm_delete')}}"  data-btn-cancel-label="{{$web->getLable('no')}}" data-btn-ok-label="{{$web->getLable('yes')}}">
                                                             <i class="fa fa-trash-o"></i> {{$web->getlable('delete')}} </a>   
                                                 </td>
                                             </tr>
-                                            @php
-                                                    $n++;
-                                                    @endphp
                                             @endforeach
                                            
                                         </tbody>
@@ -116,5 +103,6 @@
                             </form>
                         </div>
                     </div>
+
                   @endsection  
             

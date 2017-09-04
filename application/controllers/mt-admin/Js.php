@@ -16,12 +16,12 @@ class Js extends MY_Controller
             extract($post);
             //echo $code_editor;
         if($this->web->updateData(SETTING,array('additional_js' =>base64_encode($code_editor)),array('settings_id' => 1))){   
-         $this->session->set_tempdata('msg', 'บันทึกข้อมูลเรียบร้อย', 10);    
+         $this->session->set_tempdata('msg', $this->web->getLable('msg_save'), 10);    
          redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');
          }   
         }
         $data = array(
-            'title' => 'Custom Javascript',
+            'title' => $this->web->getmenuLable(30),
             'res' => $this->web->getDataOne(SETTING,array('settings_id' =>1)),
             'msg' => $this->session->tempdata('msg'),
             'ac'=>'10',

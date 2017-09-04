@@ -16,6 +16,18 @@ class Func {
    
     }
 
+    public function sysDatetime($dates){
+        if($dates!=""){
+          list($d,$t) = explode(' ', $dates);
+          list($year,$month ,$day ) = explode('-', $d);
+          return $day."/".$month."/".$year." ".$t ;
+        }else{
+          return "00/00/0000 00:00:00";
+        }
+     
+      }
+
+
 }
 
 ?>

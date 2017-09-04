@@ -24,6 +24,11 @@ if (!$authen->loggedin()) {
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
+    <script src="{{base_url('assets/global/plugins/pace/pace.min.js')}}" type="text/javascript"></script>
+        <!-- END PAGE FIRST SCRIPTS -->
+        <!-- BEGIN PAGE TOP STYLES -->
+    <link href="{{base_url('assets/global/plugins/pace/themes/pace-theme-flash.css')}}" rel="stylesheet" type="text/css" />
+        <!-- END PAGE TOP STYLES -->
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
     <link href="https://fonts.googleapis.com/css?family=Prompt" rel="stylesheet">
     <link href="{{base_url('assets/global/plugins/font-awesome/css/font-awesome.css')}}" rel="stylesheet" type="text/css" />
@@ -209,7 +214,7 @@ if (!$authen->loggedin()) {
                           
                             <li>
                                 <a href="<?=base_url('mt-admin/logout')?>">
-                                        <i class="icon-key"></i> ออกจากระบบ </a>
+                                        <i class="icon-key"></i> {{$web->getLable('logout')}} </a>
                             </li>
                         </ul>
                     </li>
@@ -259,7 +264,7 @@ if (!$authen->loggedin()) {
                         <a href="@if(empty($menu['menu_url']) or $menu['menu_url']=='#') {{'javascript:;'}} @else {{base_url('mt-admin/'.$menu['menu_url'])}} @endif"
                             class="nav-link nav-toggle">
                                 <i class="fa {{$menu['menu_icon']}}"></i>
-                                <span class="title">{{$menu['menu_name_'.$session->userdata('configlang')]}}</span>
+                                <span class="title">{{$menu['menu_name_'.$session->userdata('weblang')]}}</span>
 
                                 <span class="@if(count($qrsub)>0) {{'arrow'}} @endif"></span>
 
@@ -269,7 +274,7 @@ if (!$authen->loggedin()) {
                             <li class="nav-item  " id="submenu{{$menusub['menu_id']}}">
                                 <a href="@if(empty($menusub['menu_url']) or $menusub['menu_url']=='#') {{'javascript:;'}} @else {{base_url('mt-admin/'.$menusub['menu_url'])}} @endif"
                                     class="nav-link ">
-                                        <span class="title">{{$menusub['menu_name_'.$session->userdata('configlang')]}}</span>
+                                        <span class="title">{{$menusub['menu_name_'.$session->userdata('weblang')]}}</span>
                                     </a>
                             </li>
                             @endforeach
@@ -280,6 +285,15 @@ if (!$authen->loggedin()) {
 
                     </li>
                     @endforeach
+
+                    <li>
+                        <a href="<?=base_url('mt-admin/logout')?>"  class="nav-link nav-toggle">
+                                <i class="icon-logout"></i>
+                                <span class="title">{{$web->getLable('logout')}}</span>
+
+                            </a> 
+            
+                    </li>
 
                 </ul>
                 <!-- END SIDEBAR MENU -->
@@ -365,8 +379,12 @@ if (!$authen->loggedin()) {
         });
 
         function responsive_filemanager_callback(field_id) {
-            console.log(field_id);
+           
             var url = jQuery('#' + field_id).val();
+            var id = jQuery('#' + field_id).attr('id');
+
+            if(id === 'image_link'){
+           
             $("#inputimage").addClass("fileinput-new thumbnail");
             $("#removeimages").removeAttr("style");
             $("#inputimage").css({
@@ -374,6 +392,17 @@ if (!$authen->loggedin()) {
             });
             $('#image_preview').attr('src', document.getElementById("image_link").value).show();
             parent.$.fancybox.close();
+            }
+
+            if(id==='image_link2'){
+            $("#inputimage2").addClass("fileinput-new thumbnail");
+            $("#removeimages2").removeAttr("style");
+            $("#inputimage2").css({
+                "max-width": "200px"
+            });
+            $('#image_preview2').attr('src', document.getElementById("image_link2").value).show();
+            parent.$.fancybox.close();
+            }
         }
 
         $("#removeimages").on("click", function () {
@@ -386,6 +415,21 @@ if (!$authen->loggedin()) {
             $("#inputimage").removeAttr("style");
             $("#inputimage").removeAttr("class");
             $("#image_link").val("");
+        });
+        setTimeout(function () {
+            $('.alert').fadeOut()
+        }, 3000);
+
+        $("#removeimages2").on("click", function () {
+            $('#image_preview2').css({
+                "display": "none"
+            });
+            $("#removeimages2").css({
+                "display": "none"
+            });
+            $("#inputimage2").removeAttr("style");
+            $("#inputimage2").removeAttr("class");
+            $("#image_link2").val("");
         });
         setTimeout(function () {
             $('.alert').fadeOut()
@@ -408,5 +452,4 @@ if (!$authen->loggedin()) {
     </script>
     <!-- END THEME LAYOUT SCRIPTS -->
 </body>
-
 </html>

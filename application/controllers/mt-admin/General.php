@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Smtp extends MY_Controller
+class General extends MY_Controller
 {
     public function __construct()
     {
@@ -16,11 +16,12 @@ class Smtp extends MY_Controller
             extract($post);
             //echo $code_editor;
         $ins = array(
-            'smtp_host'=>$smtp_host,
-            'smtp_user'=>$smtp_user,
-            'smtp_pass'=>$smtp_pass,
-            'smtp_port'=>$smtp_port,
-            'smtp_active' => $status=='on'?0:1,
+            'site_name'=>$site_name,
+            'site_suffix'=>$site_suffix,
+            'site_logo'=>$link,
+            'site_favicon'=>$link2,
+            'admin_lang'=>$txt_language,
+            'lang_switching' => $lang_switching=='on'?0:1,
             
             );   
         if($this->web->updateData(SETTING,$ins,array('settings_id' => 1))){   
@@ -29,13 +30,14 @@ class Smtp extends MY_Controller
          }   
         }
         $data = array(
-            'title' => $this->web->getmenuLable(38),
+            'title' => $this->web->getmenuLable(35),
             'res' => $this->web->getDataOne(SETTING,array('settings_id' =>1)),
+            'qrgroup' =>$this->web->getDataAll(LANG),
             'msg' => $this->session->tempdata('msg'),
             'ac'=>'11',
-            'sac'=>'38'
+            'sac'=>'35'
         );
-        echo $this->blade->view()->make('mt-admin.setting.smtp', $data)->render();
+        echo $this->blade->view()->make('mt-admin.setting.general', $data)->render();
     }
 
 

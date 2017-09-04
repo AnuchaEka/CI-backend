@@ -33,7 +33,7 @@ class Profile extends MY_Controller
             $id = $this->auth->userid();
            if($this->web->CheckData(USERS,array('email'=>$txt_email,'id !='=>$id))>0){
              
-                $this->session->set_tempdata('error', 'อีเมลนี้ถูกใช้อยู่แล้วค่ะ!', 3);
+                $this->session->set_tempdata('error', $this->web->getLable('error_email_used'), 3);
                 redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');
      
             }else{
@@ -58,7 +58,7 @@ class Profile extends MY_Controller
             if($this->web->updateData(USERS,$ins,array('id'=>$id))){
        
                 if(!empty($save)){
-                $this->session->set_tempdata('msg', 'แก้ไขข้อมูลเรียบร้อย', 3);
+                $this->session->set_tempdata('msg', $this->web->getLable('msg_edit'), 3);
                 redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');
        
                 }
@@ -84,7 +84,7 @@ class Profile extends MY_Controller
             if($this->web->updateData(USERS,$ins,array('id'=>$id))){
        
                 if(!empty($save)){
-                $this->session->set_tempdata('msg', 'แก้ไขข้อมูลเรียบร้อย', 3);
+                $this->session->set_tempdata('msg', $this->web->getLable('msg_edit'), 3);
                 redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');
        
                 }else{
@@ -118,14 +118,14 @@ class Profile extends MY_Controller
             if($this->web->updateData(USERS,$ins,array('id'=>$id))){
        
                 if(!empty($save)){
-                $this->session->set_tempdata('msg', 'แก้ไขข้อมูลเรียบร้อย', 3);
+                $this->session->set_tempdata('msg', $this->web->getLable('msg_edit'), 3);
                 redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');
        
                 }
        
             }
         }else{
-            $this->session->set_tempdata('error', 'รหัสผ่านปัจจุบันไม่ถูกต้องค่ะ!', 3);
+            $this->session->set_tempdata('error', $this->web->getLable('error_current_pass'), 3);
             redirect(base_url('mt-admin/'.$this->uri->segment(2).'#tab_1_3'),'refresh');
         }
     }
