@@ -64,9 +64,18 @@ public function add()
                         'null' => TRUE,
                 ),
         );
+
+        $menuspage = array(
+            'menu_name_'.$lang_code => array(
+                'type' => 'VARCHAR',
+                'constraint' => '250',
+                'null' => TRUE,
+        ),
+);
         
         $this->web->AddColumn(MENUS,$menus);    
         $this->web->AddColumn(LANGLABEL,$fields);
+        $this->web->AddColumn(NAVIGATION,$menuspage);
 
          if(!empty($save)){
          $this->session->set_tempdata('msg', $this->web->getLable('msg_save'), 3);    
@@ -74,7 +83,7 @@ public function add()
          
          }else{
          $this->session->set_tempdata('msg', $this->web->getLable('msg_save'), 3);    
-         redirect(base_url('mt-admin/'.$this->uri->segment(2).'/'.$this->uri->segment(3).'/'.$id),'refresh'); 
+         redirect(base_url('mt-admin/'.$this->uri->segment(2).'/edit/'.$id),'refresh'); 
          
          }
 
@@ -128,8 +137,18 @@ public function edit($id)
                 ),
         );
 
+        $menuspage = array(
+            'menu_name_'.$lang_oldcode => array(
+                'name' => 'menu_name_'.$lang_code,
+                'type' => 'VARCHAR',
+                'constraint' => '250',
+                'null' => TRUE
+        ),
+);
+
         $this->web->ModifyColumn(MENUS,$menus);
         $this->web->ModifyColumn(LANGLABEL,$fields);
+        $this->web->ModifyColumn(NAVIGATION,$menuspage);
 
          if(!empty($save)){
          $this->session->set_tempdata('msg', $this->web->getLable('msg_edit'), 3);    
@@ -171,6 +190,7 @@ public function action()
                  if($this->web->deleteData(LANG,array('lang_iso_id' =>$value,'lang_default !='=>1))>0){
                  $this->dbforge->drop_column(LANGLABEL, 'lang_'.$lang_iso);
                  $this->dbforge->drop_column(MENUS, 'menu_name_'.$lang_iso);
+                 $this->dbforge->drop_column(NAVIGATION, 'menu_name_'.$lang_iso);
                  $this->session->set_tempdata('msg', $this->web->getLable('msg_delete'), 3);     
                  }
 
@@ -194,6 +214,7 @@ public function delete($id)
    if($this->web->deleteData(LANG,array('lang_iso_id' =>$id,'lang_default !='=>1))>0){
          $this->dbforge->drop_column(LANGLABEL, 'lang_'.$lang_iso);
          $this->dbforge->drop_column(MENUS, 'menu_name_'.$lang_iso);
+         $this->dbforge->drop_column(NAVIGATION, 'menu_name_'.$lang_iso);
          $this->session->set_tempdata('msg', $this->web->getLable('msg_delete'), 3); 
    
     redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');     

@@ -32,7 +32,7 @@ $ins=array(
      'menu_url' => $menu_slug,
      'menu_status' => $permission,
      'menu_icon' => $menu_icon,
-     'menu_sorting' => $this->web->getPeriodeNummer(MENUS,array('menu_parent'=>$menu_parent),'menu_sorting'),
+     'menu_sorting' => $this->web->getPeriodeNummer(MENUS,'menu_sorting',array('menu_parent'=>$menu_parent)),
      'menu_parent' => $menu_parent,
      'active' => $status=='on'?0:1,
 

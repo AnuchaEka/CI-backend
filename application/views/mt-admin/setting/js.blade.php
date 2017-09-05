@@ -7,7 +7,7 @@
                                 <div class="portlet">
                                     <div class="portlet-title">
                                         <div class="caption">
-                                            <i class="icon-wrench"></i>{{$title}} </div>
+                                            <i class="icon-magic-wand"></i>{{$title}} </div>
                                        
                                     </div>
                                     <div class="portlet-body">

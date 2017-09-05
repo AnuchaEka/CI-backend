@@ -11799,7 +11799,7 @@ Scrollable Tables
     .table-scrollable > .table-bordered > thead > tr:last-child > td,
     .table-scrollable > .table-bordered > tbody > tr:last-child > td,
     .table-scrollable > .table-bordered > tfoot > tr:last-child > td {
-      border-bottom: 0; }
+      border-bottom: 0;vertical-align:middle; }
 
 /***
 Customized Bootstrap Tables

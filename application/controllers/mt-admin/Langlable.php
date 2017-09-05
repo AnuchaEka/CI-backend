@@ -55,7 +55,7 @@ public function add()
          
          }else{
          $this->session->set_tempdata('msg', $this->web->getLable('msg_save'), 3);    
-         redirect(base_url('mt-admin/'.$this->uri->segment(2).'/'.$this->uri->segment(3).'/'.$id),'refresh');   
+         redirect(base_url('mt-admin/'.$this->uri->segment(2).'/edit/'.$id),'refresh');   
          
          }
 

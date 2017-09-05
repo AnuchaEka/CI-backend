@@ -175,9 +175,11 @@ public function __construct()
   }
 
 
-  public function getPeriodeNummer($table,$object=null,$key) {
+  public function getPeriodeNummer($table,$key,$object=null) {
     $this->db->select_max($key);
+    if(!empty($object)){
     $this->db->where($object);
+    }
     $query = $this->db->get($table);
 
     // fetch first row in object

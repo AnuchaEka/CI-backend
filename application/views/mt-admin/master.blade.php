@@ -37,6 +37,7 @@ if (!$authen->loggedin()) {
     <link href="{{base_url('assets/global/plugins/bootstrap/css/bootstrap.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{base_url('assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css')}}" rel="stylesheet" type="text/css"
     />
+    @yield('css')
     <!-- END GLOBAL MANDATORY STYLES -->
     <!-- BEGIN PAGE LEVEL PLUGINS -->
     <link href="{{base_url('assets/global/plugins/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" />

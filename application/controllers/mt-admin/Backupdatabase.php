@@ -82,10 +82,8 @@ class Backupdatabase extends MY_Controller
     
     public function delete($id)
     {
-        
+        $this->deletefile($id);
        if($this->web->deleteData(BACKUPDB,array('id' =>$id))>0){
-
-            $this->deletefile($id);
             $this->session->set_tempdata('msg', $this->web->getLable('msg_delete'), 3);
             redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');
     
@@ -99,7 +97,6 @@ class Backupdatabase extends MY_Controller
     {
         $res=$this->web->getDataOne(BACKUPDB,array('id' =>$id));
         $file=$res->backup_filename;
-        
         if(!empty($file)){
         
             $this->web->deleteFiles(FCPATH.'assets/backupdatabase/'.$file);

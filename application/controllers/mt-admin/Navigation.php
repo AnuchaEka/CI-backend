@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Bannerslide extends MY_Controller
+class Navigation extends MY_Controller
 {
 
    public function __construct()
@@ -16,11 +16,11 @@ class Bannerslide extends MY_Controller
             'res' => $this->web->getDataAll(BANNER,$this->input->post('search_keyword'),array('slideImage','slideLink')),
             'msg' => $this->session->tempdata('msg'),
             'error' => $this->session->tempdata('error'),
-            'title' => $this->web->getmenuLable(31),
+            'title' => $this->web->getmenuLable(28),
             'ac'=>'10',
-            'sac'=>'31'
+            'sac'=>'28'
         );
-        echo $this->blade->view()->make('mt-admin.layouts.bannerslide', $data)->render();
+        echo $this->blade->view()->make('mt-admin.layouts.navigation', $data)->render();
     }
 
 public function add()

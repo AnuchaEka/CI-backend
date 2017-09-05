@@ -5,7 +5,7 @@
             <div class="portlet">
                 <div class="portlet-title">
                     <div class="caption">
-                        <i class="icon-wrench"></i>{{$title}} </div>
+                        <i class="icon-user"></i>{{$title}} </div>
                         @if(sizeof($res)>0)
                         <div class="actions btn-set">
                                  

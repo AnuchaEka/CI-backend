@@ -10,7 +10,7 @@
                                         <div class="caption">
                                             <i class="icon-wrench"></i> {{$title}} </div>
                                         <div class="actions btn-set">
-                                            <a href="{{base_url('mt-admin/'.$uri->segment(2).'/backupDB')}}" target="_blank" class="btn default btn-secondary-outline">
+                                            <a href="{{base_url('mt-admin/'.$uri->segment(2).'/backupDB')}}" target="_blank" class="btn default btn-secondary-outline" onClick="window.location.reload()">
                                                 {{$web->getLable('add')}} <i class="fa fa-plus"></i></a>
                                     
                                            

@@ -30,3 +30,6 @@
   margin-left: 25px !important;
 }
 .tooltip {min-width:350px !important;}
+td{
+  vertical-align:middle !important; 
+}

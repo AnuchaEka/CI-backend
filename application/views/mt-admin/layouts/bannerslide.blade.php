@@ -8,7 +8,7 @@
                                 <div class="portlet">
                                     <div class="portlet-title">
                                         <div class="caption">
-                                            <i class="icon-wrench"></i> {{$title}} </div>
+                                            <i class="icon-magic-wand"></i> {{$title}} </div>
                                         <div class="actions btn-set">
                                             <a href="{{base_url('mt-admin/'.$uri->segment(2).'/add')}}" class="btn default btn-secondary-outline">
                                                 {{$web->getLable('add')}} <i class="fa fa-plus"></i></a>
@@ -70,24 +70,22 @@
                                             <tr >
                                                 <td>
                                                     <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
-                                                        <input type="checkbox" name="del[]" class="checkboxes" value="{{$val->lang_iso_id}}" />
+                                                        <input type="checkbox" name="del[]" class="checkboxes" value="{{$val->slideID}}" />
                                                         <span></span>
                                                     </label>
                                                 </td>
                                                 <td>
-                                                    <img src="{{$val->lang_img}}" alt="" width="25"> 
+                                                <a href="{{base_url('mt-admin/'.$uri->segment(2).'/edit/'.$val->slideID)}}"><img src="{{$val->slideImage}}" alt="" width="200"> </a> 
                                                 </td>
                                                 <td>
-                                                    <a href="{{base_url('mt-admin/'.$uri->segment(2).'/edit/'.$val->lang_iso_id)}}"> {{$val->lang_name}} </a> 
-                                                    @if($val->lang_default==1) 
-                                                    <i class="fa fa-lock"></i>
-                                                     @endif
+                                                    <a href="{{$val->slideprotocol.$val->slideLink}}" target="_blank"> {{$val->slideprotocol.$val->slideLink}} </a> 
+                                                  
                                                   </td>
                                                                     
                                                 <td class="text-center">
-                                                   <a href="{{base_url('mt-admin/'.$uri->segment(2).'/edit/'.$val->lang_iso_id)}}" class="btn btn-outline btn-circle btn-xs dark">
+                                                   <a href="{{base_url('mt-admin/'.$uri->segment(2).'/edit/'.$val->slideID)}}" class="btn btn-outline btn-circle btn-xs dark">
                                                       <i class="fa fa-edit"></i> {{$web->getlable('edit')}} </a>
-                                                   <a href="{{base_url('mt-admin/'.$uri->segment(2).'/delete/'.$val->lang_iso_id)}}" class="btn btn-outline btn-circle red btn-xs blue" data-toggle="confirmation"  data-popout="true" data-placement="left" data-singleton="true" data-title="{{$web->getLable('confirm_delete')}}"  data-btn-cancel-label="{{$web->getLable('no')}}" data-btn-ok-label="{{$web->getLable('yes')}}">
+                                                   <a href="{{base_url('mt-admin/'.$uri->segment(2).'/delete/'.$val->slideID)}}" class="btn btn-outline btn-circle red btn-xs blue" data-toggle="confirmation"  data-popout="true" data-placement="left" data-singleton="true" data-title="{{$web->getLable('confirm_delete')}}"  data-btn-cancel-label="{{$web->getLable('no')}}" data-btn-ok-label="{{$web->getLable('yes')}}">
                                                             <i class="fa fa-trash-o"></i> {{$web->getlable('delete')}} </a>   
                                                 </td>
                                             </tr>
