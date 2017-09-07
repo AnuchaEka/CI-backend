@@ -1,6 +1,7 @@
 <?php
 //-----Table DB------//
 define('USERS', 'mt_users');
+define('MEMBER', 'mt_members');
 define('MENUS', 'mt_menus');
 define('LANG', 'mt_lang_iso');
 define('LANGLABEL', 'mt_general_label');
@@ -11,4 +12,5 @@ define('AUTOLOGIN', 'mt_autologin');
 define('BACKUPDB', 'mt_backupdatabase');
 define('BANNER', 'mt_banner');
 define('NAVIGATION', 'mt_page_menu');
+define('PAGE', 'mt_pages');
 ?>

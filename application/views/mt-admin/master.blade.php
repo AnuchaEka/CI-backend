@@ -307,6 +307,18 @@ if (!$authen->loggedin()) {
         <div class="page-content-wrapper">
             <!-- BEGIN CONTENT BODY -->
             <div class="page-content">
+            <div class="page-bar">
+                        <ul class="page-breadcrumb">
+                            <li>
+                                <a href="{{base_url()}}">{{$web->getLable('home')}}</a>
+                                <i class="fa fa-circle"></i>
+                            </li>
+                            <li>
+                                <span>{{$title}}</span>
+                            </li>
+                        </ul>
+                   
+                    </div>
 
                 @yield('content')
 

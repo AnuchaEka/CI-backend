@@ -1,11 +1,23 @@
 @extends('mt-admin.master') @section('content')
+<div class="page-bar">
+                        <ul class="page-breadcrumb">
+                            <li>
+                                <a href="{{base_url()}}">{{$web->getLable('home')}}</a>
+                                <i class="fa fa-circle"></i>
+                            </li>
+                            <li>
+                                <span>{{$title}}</span>
+                            </li>
+                        </ul>
+                   
+                    </div>
 <div class="row">
     <div class="col-md-12">
         <form class="form-horizontal form-row-seperated" action="" id="form_sample_1" method="post" enctype="multipart/form-data">
             <div class="portlet light">
                 <div class="portlet-title">
                     <div class="caption">
-                        <i class="icon-user"></i>{{$title}} </div>
+                        <i class="icon-users"></i>{{$title}} </div>
                         @if(sizeof($res)>0)
                         <div class="actions btn-set">
                                  
@@ -122,23 +134,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label class="col-md-3 control-label">{{$web->getLable('role')}}:
-                                            <span class="required"> * </span>
-                                         </label>
-                                        <div class="col-md-4">
-                                        <select class="form-control" name="txt_groupid">
-                                            @foreach($qrgroup as $val)
-                                              <option value="{{$val->groupusers_id}}" @if($res->group_id==$val->groupusers_id or $input->post('txt_groupid')==$val->groupusers_id) {{'selected'}} @endif>{{$val->groupusers_name}}</option>
-                                            @endforeach  
-                                                        
-                                                    </select>                                   
-                                        </div>
-                                    </div>
-
-
-
-                                    <div class="form-group">
+                                       <div class="form-group">
                                         <label class="col-md-3 control-label">{{$web->getLable('image')}}:
                                                                
                                         </label>

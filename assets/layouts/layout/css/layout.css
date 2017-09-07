@@ -2,7 +2,7 @@
 /* Cubic Bezier Transition */
 @media print {
   body {
-    background-color: #fff !important; }
+    background-color: #eef1f5 !important; }
   .page-bar {
     display: none; }
   .page-sidebar-wrapper {
@@ -1555,7 +1555,7 @@ Page content
 .page-content {
   margin-top: 0px;
   padding: 0px;
-  background-color: #fff; }
+  background-color: #eef1f5; }
   .page-container-bg-solid .page-content {
     background: #eef1f5; }
   .page-content-white .page-content .page-bar {

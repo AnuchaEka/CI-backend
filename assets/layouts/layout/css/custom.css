@@ -33,3 +33,17 @@
 td{
   vertical-align:middle !important; 
 }
+.bordernone{
+  border: none !important;
+}
+.caption-seo {
+  font-size: 13px;
+  margin-top: 0.5em;
+  line-height: 1.5em;
+}
+
+.portlet {
+  margin-top: 25px !important;
+  margin-bottom: 25px;
+}
+

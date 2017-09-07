@@ -8,7 +8,7 @@
  <div class="row">
                         <div class="col-md-12">
                             <form class="form-horizontal form-row-seperated" action="" id="form_sample_1" method="post">
-                                <div class="portlet">
+                                <div class="portlet light">
                                     <div class="portlet-title">
                                         <div class="caption">
                                             <i class="icon-magic-wand"></i>{{$title}} </div>

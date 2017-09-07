@@ -39,12 +39,7 @@
 
                                         @endif
                                     </div>
-                                    <!-- END SIDEBAR USER TITLE -->
-
-                                </div>
-                                <!-- END PORTLET MAIN -->
-                                <!-- PORTLET MAIN -->
-                                <div class="portlet light ">
+                                    <div class="portlet light ">
                            
                      
                                     <div>
@@ -60,6 +55,13 @@
                                         
                                     </div>
                                 </div>
+
+                                   
+
+                                </div>
+                                <!-- END PORTLET MAIN -->
+                                <!-- PORTLET MAIN -->
+                                
                                 <!-- END PORTLET MAIN -->
                             </div>
                             <!-- END BEGIN PROFILE SIDEBAR -->

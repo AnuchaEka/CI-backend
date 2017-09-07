@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Users extends MY_Controller
+class Members extends MY_Controller
 {
 
    public function __construct()
@@ -16,14 +16,14 @@ class Users extends MY_Controller
     {
 
         $data = array(
-            'res' => $this->web->getDataAll(USERS,$this->input->post('search_keyword'),array('name','lastname','email','username')),
+            'res' => $this->web->getDataAll(MEMBER,$this->input->post('search_keyword'),array('name','lastname','email','username')),
             'msg' => $this->session->tempdata('msg'),
             'error' => $this->session->tempdata('error'),
-            'title' => $this->web->getmenuLable(23),
-            'ac'=>'8',
-            'sac'=>'23'
+            'title' => $this->web->getmenuLable(26),
+            'ac'=>'9',
+            'sac'=>'26'
         );
-        echo $this->blade->view()->make('mt-admin.users.users', $data)->render();
+        echo $this->blade->view()->make('mt-admin.members.members', $data)->render();
     }
 
 public function add()
@@ -32,10 +32,10 @@ public function add()
   if($post=$this->input->post()){
      extract($post);
 
-     if($this->web->CheckData(USERS,array('username'=>$txt_username))>0){
+     if($this->web->CheckData(MEMBER,array('username'=>$txt_username))>0){
         $this->session->set_tempdata('error', $this->web->getLable('error_username_used'), 3);
         redirect(base_url('mt-admin/'.$this->uri->segment(2).'/'.$this->uri->segment(3)),'refresh');
-    }else if($this->web->CheckData(USERS,array('email'=>$txt_email))>0){
+    }else if($this->web->CheckData(MEMBER,array('email'=>$txt_email))>0){
      
         $this->session->set_tempdata('error', $this->web->getLable('error_email_used'), 3);
         redirect(base_url('mt-admin/'.$this->uri->segment(2).'/'.$this->uri->segment(3)),'refresh');
@@ -53,8 +53,6 @@ public function add()
             'email' =>$txt_email, 
             'username' =>$txt_username, 
             'password' =>$this->bcrypt->HashPassword($txt_password), 
-            'parent' =>1, 
-            'group_id' =>$txt_groupid, 
             'timestamp_create' =>date('Y-m-d H:i:s'), 
             'forgotpassword' =>0
              );
@@ -64,7 +62,7 @@ public function add()
                 $ins['avatar']=$cc;
             }
        
-            $id=$this->web->insertData(USERS,$ins);
+            $id=$this->web->insertData(MEMBER,$ins);
        
             if(!empty($id)){
 
@@ -84,21 +82,20 @@ public function add()
   //print_r($this->input->post());
   }
     $data = array(
-            'title' => $this->web->getmenuLable(24),
-            'qrgroup' => $this->web->getDataWhere(GROUPS,array('active'=>0)),
+            'title' => $this->web->getmenuLable(27),
             'error' => $this->session->tempdata('error'),
             'msg' => $this->session->tempdata('msg'),
-            'ac'=>'8',
-            'sac'=>'24'
+            'ac'=>'9',
+            'sac'=>'27'
         );
-        echo $this->blade->view()->make('mt-admin.users.usersform', $data)->render();
+        echo $this->blade->view()->make('mt-admin.members.membersform', $data)->render();
 }
 
 public function edit($id)
 {
     if($post=$this->input->post()){
      extract($post);
-     if($this->web->CheckData(USERS,array('email'=>$txt_email,'id !='=>$id))>0){
+     if($this->web->CheckData(MEMBER,array('email'=>$txt_email,'id !='=>$id))>0){
         
            $this->session->set_tempdata('error', $this->web->getLable('error_email_used'), 3);
            redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');
@@ -114,8 +111,6 @@ public function edit($id)
         'gender' =>$txt_gender, 
         'email' =>$txt_email, 
         'username' =>$txt_username, 
-        'parent' =>1, 
-        'group_id' =>$txt_groupid, 
         'timestamp_create' =>date('Y-m-d H:i:s'), 
         'forgotpassword' =>0
        );
@@ -129,7 +124,7 @@ public function edit($id)
         $ins['avatar']=$cc;
         }     
   
-     if($this->web->updateData(USERS,$ins,array('id'=>$id))){
+     if($this->web->updateData(MEMBER,$ins,array('id'=>$id))){
 
          if(!empty($save)){
          $this->session->set_tempdata('msg', $this->web->getLable('msg_edit'), 3);
@@ -148,14 +143,13 @@ public function edit($id)
   }
 
     $data = array(
-            'res' => $this->web->getDataOne(USERS,array('id' =>$id)),
-            'qrgroup' => $this->web->getDataWhere(GROUPS,array('active'=>0)),
-            'title' => $this->web->getmenuLable(23),
+            'res' => $this->web->getDataOne(MEMBER,array('id' =>$id)),
+            'title' => $this->web->getmenuLable(26),
             'msg' => $this->session->tempdata('msg'),
-             'ac'=>'8',
-            'sac'=>'23'
+             'ac'=>'9',
+            'sac'=>'26'
         );
-        echo $this->blade->view()->make('mt-admin.users.usersform', $data)->render();
+        echo $this->blade->view()->make('mt-admin.members.membersform', $data)->render();
 }
 
 public function action()
@@ -167,7 +161,7 @@ public function action()
         if($action=='Del'){
             if(count($del)>0){
                 foreach ($del as $key => $value) {
-                 if($this->web->deleteData(USERS,array('id' =>$value))>0){
+                 if($this->web->deleteData(MEMBER,array('id' =>$value))>0){
                  $this->session->set_tempdata('msg', $this->web->getLable('msg_delete'), 3);
                  }
 
@@ -187,7 +181,7 @@ public function action()
 public function delete($id)
 {
 
-   if($this->web->deleteData(USERS,array('id' =>$id))>0){
+   if($this->web->deleteData(MEMBER,array('id' =>$id))>0){
          $this->session->set_tempdata('msg', $this->web->getLable('msg_delete'), 3);
 
     redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');
@@ -201,7 +195,7 @@ public function delete($id)
 public function status($id)
 {
 
-   if($this->web->updateData(USERS,array('status'=>$this->input->get('status')),array('id'=>$id))){
+   if($this->web->updateData(MEMBER,array('status'=>$this->input->get('status')),array('id'=>$id))){
     redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');
 
    }
@@ -209,9 +203,9 @@ public function status($id)
 
 public function deletefile($id)
 {
-    $res=$this->web->getDataOne(USERS,array('id' =>$id));
+    $res=$this->web->getDataOne(MEMBER,array('id' =>$id));
     $img=$res->avatar;
-    if($this->web->updateData(USERS,array('avatar'=>''),array('id'=>$id))){
+    if($this->web->updateData(MEMBER,array('avatar'=>''),array('id'=>$id))){
     
         $this->web->deleteFiles($_SERVER['DOCUMENT_ROOT'].'/assets/profiles/'.$img);
         redirect(base_url('mt-admin/'.$this->uri->slash_segment(2).'edit/'.$this->uri->segment(4)),'refresh');

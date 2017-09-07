@@ -1,13 +1,25 @@
                 @extends('mt-admin.master')
 
                 @section('content')
+                <div class="page-bar">
+                        <ul class="page-breadcrumb">
+                            <li>
+                                <a href="{{base_url()}}">{{$web->getLable('home')}}</a>
+                                <i class="fa fa-circle"></i>
+                            </li>
+                            <li>
+                                <span>{{$title}}</span>
+                            </li>
+                        </ul>
+                   
+                    </div>
                 <div class="row">
                 <div class="col-md-12">
                     
                         <div class="portlet light">
                             <div class="portlet-title">
                                 <div class="caption">
-                                    <i class="icon-user"></i> {{$title}} </div>
+                                    <i class="icon-users"></i> {{$title}} </div>
                                 <div class="actions btn-set">
                                  
                                     <a href="{{base_url('mt-admin/'.$uri->segment(2).'/add')}}" class="btn default btn-secondary-outline">
@@ -63,14 +75,12 @@
                                         <th> {{$web->getLable('name')}} </th>
                                         <th> {{$web->getLable('users')}} </th>
                                         <th> {{$web->getLable('email')}} </th>
-                                        <th> {{$web->getLable('role')}} </th>
                                         <th style="width:15%"> {{$web->getLable('status')}} </th>   
                                         <th style="width:15%"> &nbsp;</th> 
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($res as $val)
-                                    @if($val->parent != 0)
                                     <tr >
                                         <td>
                                             <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
@@ -90,12 +100,7 @@
                                             {{$val->email}} 
                                           
                                           </td>          
-                                       <td>
-                                           
-                                            {{$web->getDatafields(GROUPS,'groupusers_name',array('groupusers_id'=>$val->group_id))}}
-                                        
-                                        </td>
-                                        
+                                                                  
                                         <td>
                                          @if($val->status==0)     
                                         <a href="{{base_url('mt-admin/'.$uri->segment(2).'/status/'.$val->id.'?status=1')}}" ><i class="fa fa-check  fa-2x text-success"></i></a>
@@ -113,7 +118,7 @@
                                              <i class="fa fa-trash-o"></i> {{$web->getlable('delete')}} </a>   
                                         </td>
                                     </tr>
-                                    @endif
+           
                                     @endforeach
                                    
                                 </tbody>
