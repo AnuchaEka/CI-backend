@@ -12,8 +12,8 @@
             ],
               
     // อยากกำหนดอะไรก็ใส่ที่นี่
-    filebrowserBrowseUrl : baseurl+'assets/filemanager/dialog.php?type=2&editor=ckeditor&fldr=images',
-	filebrowserUploadUrl : baseurl+'assets/filemanager/dialog.php?type=2&editor=ckeditor&fldr=images',
+    filebrowserBrowseUrl : baseurl+'assets/filemanager/dialog.php?type=1&editor=ckeditor&fldr=images',
+	filebrowserUploadUrl : baseurl+'assets/filemanager/dialog.php?type=1&editor=ckeditor&fldr=images',
 	filebrowserImageBrowseUrl : baseurl+'assets/filemanager/dialog.php?type=1&editor=ckeditor&fldr=images'
     } );
     //]]>
