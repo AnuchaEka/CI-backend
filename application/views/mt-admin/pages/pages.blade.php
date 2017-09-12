@@ -61,7 +61,7 @@
                                                 <span></span>
                                             </label>
                                         </th>
-                                        <th> {{$web->getLable('name')}} </th>
+                                        <th> {{$web->getLable('name')}}</th>
                                         <th style="width:15%"> {{$web->getLable('status')}} </th>   
                                         <th style="width:15%"> &nbsp;</th> 
                                     </tr>
@@ -76,7 +76,7 @@
                                             </label>
                                         </td>
                                         <td>
-                                            <a href="{{base_url('mt-admin/'.$uri->segment(2).'/edit/'.$val['pages_id'])}}"> {{$val['page_name_'.$session->userdata('configlang')]}} </a> 
+                                            <a href="{{base_url('mt-admin/'.$uri->segment(2).'/edit/'.$val['pages_id'])}}"> {{$val['page_name_'.$session->userdata('configlang')]}} </a> @if($val['status']=='Draft') <strong>-- {{$web->getLable('save_draft')}}</strong> @endif
                                           
                                           </td>
               

@@ -13,4 +13,5 @@ define('BACKUPDB', 'mt_backupdatabase');
 define('BANNER', 'mt_banner');
 define('NAVIGATION', 'mt_page_menu');
 define('PAGE', 'mt_pages');
+define('SEO', 'mt_seo');
 ?>

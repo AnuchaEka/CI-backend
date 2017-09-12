@@ -77,14 +77,14 @@
                                 <div class="portlet-title bordernone">
                                     <div class="caption">
                                         <div>
-                                            <h4 class="caption-subject bold seo-font-blue" id="seotitle"><span id="seo-title">{{$res['page_name_'.$session->userdata('configlang')]}}</span> | {{$web->getDatafields(SETTING,'meta_title',array('settings_id'=>1))}}</h4>
+                                            <h4 class="caption-subject bold seo-font-blue" id="seotitle"><span id="seo-title">@if(!empty($seo->meta_keyword)) {{$seo->meta_keyword}}  @else {{$res['page_name_'.$session->userdata('configlang')]}} @endif</span> | {{$web->getDatafields(SETTING,'meta_title',array('settings_id'=>1))}}</h4>
                                         </div>
 
                                         <div>
                                             <span class="seo-font-green">{{base_url()}}</span><span id="seo-url">{{$res['page_slug_'.$session->userdata('configlang')]}}/</span>
                                         </div>
 
-                                        <div class="caption-seo font-grey-cascade"> <span id="seo-description">{{$web->getDatafields(SETTING,'meta_description',array('settings_id'=>1))}}</span></div>
+                                        <div class="caption-seo font-grey-cascade"> <span id="seo-description">@if(!empty($seo->meta_description)) {{$seo->meta_description}}  @else {{$web->getDatafields(SETTING,'meta_description',array('settings_id'=>1))}} @endif</span></div>
 
                                     </div>
                                 </div>
@@ -94,17 +94,17 @@
                         <div class="form-group">
                             <label class="control-label">Meta Title:</label>
                             <input type="text" class="form-control maxlength-handler" name="meta_title" id="meta_title" autocomplete="off" maxlength="100"
-                                value="{{$res->meta_title}}">
+                                value="{{$seo->meta_title}}">
                             <span class="help-block"> {{$web->getLable('max')}} 100 {{$web->getLable('chars')}} </span>
                         </div>
                         <div class="form-group">
                             <label class="control-label">Meta Keywords:</label>
-                            <textarea class="form-control maxlength-handler" rows="8" name="meta_keywords" id="meta_keywords" maxlength="1000">{{$res->meta_keywords}}</textarea>
+                            <textarea class="form-control maxlength-handler" rows="8" name="meta_keywords" id="meta_keywords" maxlength="1000">{{$seo->meta_keyword}}</textarea>
                             <span class="help-block"> {{$web->getLable('max')}} 1000 {{$web->getLable('chars')}} </span>
                         </div>
                         <div class="form-group">
                             <label class="control-label">Meta Description:</label>
-                            <textarea class="form-control maxlength-handler" rows="8" name="meta_description" id="meta_description" maxlength="255">{{$res->meta_description}}</textarea>
+                            <textarea class="form-control maxlength-handler" rows="8" name="meta_description" id="meta_description" maxlength="255">{{$seo->meta_description}}</textarea>
                             <span class="help-block"> {{$web->getLable('max')}} 255 {{$web->getLable('chars')}} </span>
                         </div>
 
@@ -182,8 +182,7 @@
 
                     <div class="actions btn-set">
 
-                        <button class="btn btn-success" type="submit" name="save
-" value="Draft">
+                        <button class="btn btn-success" type="submit" name="save" value="Draft">
                                                 <i class="fa fa-check"></i> {{$web->getLable('save_draft')}}</button>
 
                         <button class="btn btn-success" type="submit" name="save" value="Publish">
@@ -320,12 +319,23 @@
     });
 
     $("#meta_title").keyup(function (e) {
-        $('#seo-title').html($(this).val());
+        if($(this).val()==''){
+            $('#seo-title').html($('#page_name').val());   
+        }else{
+           $('#seo-title').html($(this).val());
+        }
+       
         //    alert($(this).val());
     });
 
     $("#meta_description").keyup(function (e) {
-        $('#seo-description').html($(this).val());
+
+        if($(this).val()==''){
+         $('#seo-description').html("{{$web->getDatafields(SETTING,'meta_description',array('settings_id'=>1))}}");  
+        }else{
+         $('#seo-description').html($(this).val());
+        }
+        
         //    alert($(this).val());
     });
 </script>
