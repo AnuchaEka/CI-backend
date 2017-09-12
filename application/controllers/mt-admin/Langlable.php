@@ -81,7 +81,7 @@ public function edit($id)
 
      $ins=array(
      'name' => $langlable_name,
-     'timestamp_create' =>date('Y-m-d H:i:s'),
+     'timestamp_update' =>date('Y-m-d H:i:s'),
 
       );
 

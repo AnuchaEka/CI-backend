@@ -35,7 +35,8 @@ $ins=array(
      'menu_sorting' => $this->web->getPeriodeNummer(MENUS,'menu_sorting',array('menu_parent'=>$menu_parent)),
      'menu_parent' => $menu_parent,
      'active' => $status=='on'?0:1,
-
+     'timestamp_create' =>date('Y-m-d H:i:s'),
+     'timestamp_update' =>date('Y-m-d H:i:s'),
       );
 
     $id=$this->web->insertData(MENUS,$ins);
@@ -77,7 +78,7 @@ $ins=array(
      'menu_icon' => $menu_icon,
      'menu_parent' => $menu_parent,
      'active' => $status=='on'?0:1,
-
+     'timestamp_update' =>date('Y-m-d H:i:s'),
       );
 
 

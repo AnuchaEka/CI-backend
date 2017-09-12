@@ -39,7 +39,8 @@ public function add()
      'groupusers_name' => $group_name,
      'groupusers_url' => $group_url,
      'active' => $status=='on'?0:1,
-      'timestamp_create' => date('Y-m-d H:i:s') 
+      'timestamp_create' => date('Y-m-d H:i:s'),
+      'timestamp_update' =>date('Y-m-d H:i:s'),
       );
 
      $id=$this->web->insertData(GROUPS,$ins);
@@ -95,7 +96,7 @@ public function edit($id)
      'groupusers_name' => $group_name,
      'groupusers_url' => $group_url,
      'active' => $status=='on'?0:1,
-     'timestamp_create' => date('Y-m-d H:i:s')
+     'timestamp_update' => date('Y-m-d H:i:s')
       );
 
 

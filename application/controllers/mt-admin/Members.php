@@ -54,6 +54,7 @@ public function add()
             'username' =>$txt_username, 
             'password' =>$this->bcrypt->HashPassword($txt_password), 
             'timestamp_create' =>date('Y-m-d H:i:s'), 
+            'timestamp_update' =>date('Y-m-d H:i:s'), 
             'forgotpassword' =>0
              );
 
@@ -111,7 +112,7 @@ public function edit($id)
         'gender' =>$txt_gender, 
         'email' =>$txt_email, 
         'username' =>$txt_username, 
-        'timestamp_create' =>date('Y-m-d H:i:s'), 
+        'timestamp_update' =>date('Y-m-d H:i:s'), 
         'forgotpassword' =>0
        );
 

@@ -462,6 +462,16 @@ if (!$authen->loggedin()) {
             }
 
         }
+
+        function slugify(input)
+        {
+            return input
+                .replace(/^\s\s*/, '') // Trim start
+                .replace(/\s\s*$/, '') // Trim end
+                .toLowerCase() // Camel case is bad
+                .replace(/[^a-zก-๙0-9_\-~!\+\s]+/g, '') // Exchange invalid chars
+                .replace(/[\s]+/g, '-'); // Swap whitespace for single hyphen
+        }
     </script>
     <!-- END THEME LAYOUT SCRIPTS -->
 </body>

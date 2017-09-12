@@ -55,7 +55,8 @@ public function add()
             'password' =>$this->bcrypt->HashPassword($txt_password), 
             'parent' =>1, 
             'group_id' =>$txt_groupid, 
-            'timestamp_create' =>date('Y-m-d H:i:s'), 
+            'timestamp_create' =>date('Y-m-d H:i:s'),
+             'timestamp_update' =>date('Y-m-d H:i:s'),
             'forgotpassword' =>0
              );
 
@@ -116,7 +117,7 @@ public function edit($id)
         'username' =>$txt_username, 
         'parent' =>1, 
         'group_id' =>$txt_groupid, 
-        'timestamp_create' =>date('Y-m-d H:i:s'), 
+        'timestamp_update' =>date('Y-m-d H:i:s'), 
         'forgotpassword' =>0
        );
 

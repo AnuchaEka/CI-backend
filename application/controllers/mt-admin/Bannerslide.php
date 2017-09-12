@@ -36,6 +36,7 @@ public function add()
      'slideprotocol'=>$protocol,
      'active' => $status=='on'?0:1,
      'timestamp_create' =>date('Y-m-d H:i:s'),
+     'timestamp_update' =>date('Y-m-d H:i:s'),
       );
      
      $id=$this->web->insertData(BANNER,$ins);
@@ -77,7 +78,7 @@ public function edit($id)
         'slideImage' => $link,
         'slideprotocol'=>$protocol,
         'active' => $status=='on'?0:1,
-        'timestamp_create' =>date('Y-m-d H:i:s'),
+        'timestamp_update' =>date('Y-m-d H:i:s'),
       );
      
 

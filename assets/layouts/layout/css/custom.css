@@ -53,3 +53,6 @@ td{
 .seo-font-blue{
   color: #1e0fbe;
 }
+.control-label{
+  font-weight: bold;
+}

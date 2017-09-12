@@ -72,10 +72,28 @@ public function add()
                 'null' => TRUE,
         ),
 );
+
+    $pages = array(
+        'page_name_'.$lang_code => array(
+            'type' => 'VARCHAR',
+            'constraint' => '250',
+            'null' => TRUE,
+    ),
+        'page_content_'.$lang_code => array(
+            'type' => 'TEXT',
+            'null' => TRUE,
+    ),
+        'page_slug_'.$lang_code => array(
+        'type' => 'VARCHAR',
+        'constraint' => '250',
+        'null' => TRUE,
+    ),
+    );
         
         $this->web->AddColumn(MENUS,$menus);    
         $this->web->AddColumn(LANGLABEL,$fields);
         $this->web->AddColumn(NAVIGATION,$menuspage);
+        $this->web->AddColumn(PAGE,$pages);
 
          if(!empty($save)){
          $this->session->set_tempdata('msg', $this->web->getLable('msg_save'), 3);    
@@ -145,10 +163,26 @@ public function edit($id)
                 'null' => TRUE
         ),
 );
-
+        $pages = array(
+            'page_name_'.$lang_code => array(
+                'type' => 'VARCHAR',
+                'constraint' => '250',
+                'null' => TRUE,
+        ),
+            'page_content_'.$lang_code => array(
+                'type' => 'TEXT',
+                'null' => TRUE,
+        ),
+            'page_slug_'.$lang_code => array(
+                'type' => 'VARCHAR',
+                'constraint' => '250',
+                'null' => TRUE,
+            ),
+        );
         $this->web->ModifyColumn(MENUS,$menus);
         $this->web->ModifyColumn(LANGLABEL,$fields);
         $this->web->ModifyColumn(NAVIGATION,$menuspage);
+        $this->web->ModifyColumn(PAGE,$pages);
 
          if(!empty($save)){
          $this->session->set_tempdata('msg', $this->web->getLable('msg_edit'), 3);    
@@ -191,6 +225,9 @@ public function action()
                  $this->dbforge->drop_column(LANGLABEL, 'lang_'.$lang_iso);
                  $this->dbforge->drop_column(MENUS, 'menu_name_'.$lang_iso);
                  $this->dbforge->drop_column(NAVIGATION, 'menu_name_'.$lang_iso);
+                 $this->dbforge->drop_column(PAGE, 'page_name_'.$lang_iso);
+                 $this->dbforge->drop_column(PAGE, 'page_content_'.$lang_iso);
+                 $this->dbforge->drop_column(PAGE, 'page_slug_'.$lang_iso);
                  $this->session->set_tempdata('msg', $this->web->getLable('msg_delete'), 3);     
                  }
 
@@ -215,6 +252,9 @@ public function delete($id)
          $this->dbforge->drop_column(LANGLABEL, 'lang_'.$lang_iso);
          $this->dbforge->drop_column(MENUS, 'menu_name_'.$lang_iso);
          $this->dbforge->drop_column(NAVIGATION, 'menu_name_'.$lang_iso);
+         $this->dbforge->drop_column(PAGE, 'page_name_'.$lang_iso);
+         $this->dbforge->drop_column(PAGE, 'page_content_'.$lang_iso);
+         $this->dbforge->drop_column(PAGE, 'page_slug_'.$lang_iso);
          $this->session->set_tempdata('msg', $this->web->getLable('msg_delete'), 3); 
    
     redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');     

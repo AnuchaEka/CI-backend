@@ -29,39 +29,32 @@ public function add()
   if($post=$this->input->post()){
      extract($post);
 
-     if($this->web->CheckData(PAGE,array('page_name'=>$page_name))>0){
+     if($this->web->CheckData(PAGE,array('page_name_'.$this->session->configlang=>$page_name))>0){
         $this->session->set_tempdata('error', $this->web->getLable('error_data_used'), 3);
         redirect(base_url('mt-admin/'.$this->uri->segment(2).'/'.$this->uri->segment(3)),'refresh');
     }else{ 
      
         $ins=array(
-            'name' =>$txt_name, 
-            'lastname' =>$txt_lastname, 
-            'status' => $status=='on'?0:1, 
-            'address' =>$txt_address, 
-            'phone' =>$txt_tel, 
-            'gender' =>$txt_gender, 
-            'email' =>$txt_email, 
-            'username' =>$txt_username, 
-            'password' =>$this->bcrypt->HashPassword($txt_password), 
-            'timestamp_create' =>date('Y-m-d H:i:s'), 
-            'forgotpassword' =>0
+            'page_order' =>$page_order, 
+            'page_name_'.$this->session->configlang =>$page_name, 
+            'active' => $status=='on'?0:1, 
+            'page_slug_'.$this->session->configlang =>$seo_link, 
+            'page_parent' =>$parent, 
+            'page_content_'.$this->session->configlang =>$page_content, 
+            'custom_css' =>base64_encode($code_editor),
+            'page_image' =>$link, 
+            'status' =>$save, 
+            'timestamp_create' =>date('Y-m-d H:i:s'),
+            'timestamp_update' =>date('Y-m-d H:i:s'),  
              );
 
             $id=$this->web->insertData(PAGE,$ins);
        
             if(!empty($id)){
-
-                if(!empty($save)){
-                $this->session->set_tempdata('msg', $this->web->getLable('msg_save'), 3);
-                redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');
-       
-                }else{
+            
                 $this->session->set_tempdata('msg', $this->web->getLable('msg_save'), 3);
                 redirect(base_url('mt-admin/'.$this->uri->segment(2).'/edit/'.$id),'refresh');
-       
-                }
-       
+              
             }
 
     }
@@ -69,6 +62,7 @@ public function add()
   }
     $data = array(
             'title' => $this->web->getmenuLable(13),
+            'page'=>$this->web->getDataWhere(PAGE,array('page_parent'=>0),2),
             'error' => $this->session->tempdata('error'),
             'msg' => $this->session->tempdata('msg'),
             'ac'=>'4',
@@ -81,38 +75,30 @@ public function edit($id)
 {
     if($post=$this->input->post()){
      extract($post);
-     if($this->web->CheckData(PAGE,array('page_name'=>$page_name))>0){
+     if($this->web->CheckData(PAGE,array('page_name_'.$this->session->configlang=>$page_name))>0){
         
            $this->session->set_tempdata('error', $this->web->getLable('error_data_used'), 3);
            redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');
        
    
        }else{   
-     $ins=array(
-        'name' =>$txt_name, 
-        'lastname' =>$txt_lastname, 
-        'status' => $status=='on'?0:1, 
-        'address' =>$txt_address, 
-        'phone' =>$txt_tel, 
-        'gender' =>$txt_gender, 
-        'email' =>$txt_email, 
-        'username' =>$txt_username, 
-        'timestamp_create' =>date('Y-m-d H:i:s'), 
-        'forgotpassword' =>0
-       );
+        $ins=array(
+            'page_order' =>$page_order, 
+            'page_name_'.$this->session->configlang =>$page_name, 
+            'active' => $status=='on'?0:1, 
+            'page_slug_'.$this->session->configlang =>$seo_link, 
+            'page_parent' =>$parent, 
+            'page_content_'.$this->session->configlang =>$page_content, 
+            'custom_css' =>base64_encode($code_editor), 
+            'page_image' =>$link, 
+            'status' =>$save, 
+            'timestamp_update' =>date('Y-m-d H:i:s'),  
+             );
 
        if($this->web->updateData(PAGE,$ins,array('pages_id'=>$id))){
 
-         if(!empty($save)){
-         $this->session->set_tempdata('msg', $this->web->getLable('msg_edit'), 3);
-         redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');
-
-         }else{
          $this->session->set_tempdata('msg', $this->web->getLable('msg_edit'), 3);
          redirect(base_url('mt-admin/'.$this->uri->segment(2).'/'.$this->uri->segment(3).'/'.$id),'refresh');
-
-         }
-
      }
     }
 
@@ -120,8 +106,9 @@ public function edit($id)
   }
 
     $data = array(
-            'res' => $this->web->getDataOne(PAGE,array('pages_id' =>$id)),
+            'res' => $this->web->getDataOne(PAGE,array('pages_id' =>$id),2),
             'title' => $this->web->getmenuLable(12),
+            'page'=>$this->web->getDataWhere(PAGE,array('page_parent'=>0),2),
             'msg' => $this->session->tempdata('msg'),
              'ac'=>'4',
             'sac'=>'12'
