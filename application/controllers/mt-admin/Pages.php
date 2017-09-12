@@ -39,7 +39,6 @@ public function add()
             'page_name_'.$this->session->configlang =>$page_name, 
             'active' => $status=='on'?0:1, 
             'page_slug_'.$this->session->configlang =>$seo_link, 
-            'page_parent' =>$parent, 
             'page_content_'.$this->session->configlang =>$page_content, 
             'custom_css' =>base64_encode($code_editor),
             'page_image' =>$link, 
@@ -73,7 +72,6 @@ public function add()
   }
     $data = array(
             'title' => $this->web->getmenuLable(13),
-            'page'=>$this->web->getDataWhere(PAGE,array('page_parent'=>0),2),
             'error' => $this->session->tempdata('error'),
             'msg' => $this->session->tempdata('msg'),
             'ac'=>'4',
@@ -98,7 +96,6 @@ public function edit($id)
             'page_name_'.$this->session->configlang =>$page_name, 
             'active' => $status=='on'?0:1, 
             'page_slug_'.$this->session->configlang =>$seo_link, 
-            'page_parent' =>$parent, 
             'page_content_'.$this->session->configlang =>$page_content, 
             'custom_css' =>base64_encode($code_editor), 
             'page_image' =>$link, 
@@ -137,7 +134,6 @@ public function edit($id)
             'res' => $this->web->getDataOne(PAGE,array('pages_id' =>$id),2),
             'seo' => $this->web->getDataOne(SEO,array('ref_id' =>$id)),
             'title' => $this->web->getmenuLable(12),
-            'page'=>$this->web->getDataWhere(PAGE,array('page_parent'=>0),2),
             'msg' => $this->session->tempdata('msg'),
              'ac'=>'4',
             'sac'=>'12'

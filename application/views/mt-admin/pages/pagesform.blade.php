@@ -41,7 +41,7 @@
                         <div class="form-group">
                             <label class="control-label">{{$web->getLable('name')}}</label>
 
-                            <input type="text" class="form-control" name="page_name" id="page_name" autocomplete="off" value="{{$res['page_name_'.$session->userdata('configlang')]}}">
+                            <input type="text" class="form-control" name="page_name" id="page_name" required autocomplete="off" value="{{$res['page_name_'.$session->userdata('configlang')]}}">
 
                         </div>
 
@@ -163,6 +163,12 @@
                         </select>
                         </div>
 
+                        <div class="form-group">
+                                <label class="control-label">{{$web->getLable('sorting')}} </label>
+                                <input type="text" class="form-control" name="page_order" value="@if(!empty($res['page_order'])) {{$res['page_order']}} @else {{$web->getPeriodeNummer(PAGE,'page_order')}} @endif">
+
+                            </div>
+
 
                         <div class="form-group">
                             <label class="control-label">{{$web->getLable('status')}} </label>
@@ -193,57 +199,7 @@
                 </div>
             </div>
 
-            <div class="portlet light">
-                <div class="portlet-title">
-                    <div class="caption">
-                        {{$web->getLable('features_page')}} </div>
-
-                    <div class="tools">
-                        <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
-
-                    </div>
-                </div>
-
-
-                <div class="portlet-body">
-
-                    <div class="portlet-body">
-
-                        <div class="form-body">
-                            <div class="form-group">
-                                <label class="control-label">{{$web->getLable('main')}} </label>
-
-                                <select class=" form-control" name="parent">
-                        <option  value="0">({{$web->getLable('no_main_group')}})</option>
-                        @foreach($page as $val)
-                        <option @if($res['page_parent']==$val['pages_id']) selected @endif value="{{$val['pages_id']}}">{{$val['page_name_'.$session->userdata('configlang')]}}</option>
-                        @endforeach
-                      </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="control-label">{{$web->getLable('template')}} </label>
-                                <select class=" form-control" name="template">
-                        <option  value="0">{{$web->getLable('default_template')}}</option>    
-                        <!-- @foreach($web->getDataWhere(LANG,array('active'=>0),1) as $val)
-                        <option @if($session->userdata('configlang')==$val['lang_iso']) selected @endif value="{{'?lang='.$val['lang_iso']}}">{{$val['lang_name']}}</option>
-                        @endforeach -->
-                      </select>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">{{$web->getLable('sorting')}} </label>
-                                <input type="text" class="form-control" name="page_order" value="@if(!empty($res['page_order'])) {{$res['page_order']}} @else {{$web->getPeriodeNummer(PAGE,'page_order')}} @endif">
-
-                            </div>
-
-
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-
+ 
             <div class="portlet light">
                 <div class="portlet-title">
                     <div class="caption">

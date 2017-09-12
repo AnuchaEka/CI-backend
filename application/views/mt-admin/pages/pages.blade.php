@@ -61,7 +61,7 @@
                                                 <span></span>
                                             </label>
                                         </th>
-                                        <th> {{$web->getLable('name')}}</th>
+                                        <th> {{$web->getLable('text_name')}}</th>
                                         <th style="width:15%"> {{$web->getLable('status')}} </th>   
                                         <th style="width:15%"> &nbsp;</th> 
                                     </tr>
