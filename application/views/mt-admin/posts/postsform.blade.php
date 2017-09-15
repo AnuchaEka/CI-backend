@@ -41,13 +41,13 @@
                         <div class="form-group">
                             <label class="control-label">{{$web->getLable('text_name')}}</label>
 
-                            <input type="text" class="form-control" name="page_name" id="page_name" required autocomplete="off" value="{{$res['page_name_'.$session->userdata('configlang')]}}">
+                            <input type="text" class="form-control" name="posts_name" id="posts_name" required autocomplete="off" value="{{$res['posts_name_'.$session->userdata('configlang')]}}">
 
                         </div>
 
                         <div class="form-group">
                             <label class="control-label">{{$web->getLable('detail')}}</label>
-                            <textarea class="form-control" name="page_content" id="txteditor">{{$res['page_content_'.$session->userdata('configlang')]}}</textarea>
+                            <textarea class="form-control" name="posts_content" id="txteditor">{{$res['posts_content_'.$session->userdata('configlang')]}}</textarea>
 
                         </div>
 
@@ -77,11 +77,11 @@
                                 <div class="portlet-title bordernone">
                                     <div class="caption">
                                         <div>
-                                            <h4 class="caption-subject bold seo-font-blue" id="seotitle"><span id="seo-title">@if(!empty($seo->meta_title)) {{$seo->meta_title}}  @else {{$res['page_name_'.$session->userdata('configlang')]}} @endif</span> | {{$web->getDatafields(SETTING,'meta_title',array('settings_id'=>1))}}</h4>
+                                            <h4 class="caption-subject bold seo-font-blue" id="seotitle"><span id="seo-title">@if(!empty($seo->meta_title)) {{$seo->meta_title}}  @else {{$res['posts_name_'.$session->userdata('configlang')]}} @endif</span> | {{$web->getDatafields(SETTING,'meta_title',array('settings_id'=>1))}}</h4>
                                         </div>
 
                                         <div>
-                                            <span class="seo-font-green">{{base_url()}}<span id="seo-url">{{$res['page_slug_'.$session->userdata('configlang')]}}@if(!empty($res)){{'/'}}@endif</span></span>
+                                            <span class="seo-font-green">{{base_url()}}<span id="seo-url">{{$res['posts_slug_'.$session->userdata('configlang')]}}@if(!empty($res)){{'/'}}@endif</span></span>
                                         </div>
 
                                         <div class="caption-seo font-grey-cascade"> <span id="seo-description">@if(!empty($seo->meta_description)) {{$seo->meta_description}}  @else {{$web->getDatafields(SETTING,'meta_description',array('settings_id'=>1))}} @endif</span></div>
@@ -165,7 +165,7 @@
 
                         <div class="form-group">
                                 <label class="control-label">{{$web->getLable('sorting')}} </label>
-                                <input type="text" class="form-control" name="page_order" value="@if(!empty($res['page_order'])){{$res['page_order']}}@else{{$web->getPeriodeNummer(PAGE,'page_order')}}@endif">
+                                <input type="text" class="form-control" name="posts_order" value="@if(!empty($res['posts_order'])){{$res['posts_order']}}@else{{$web->getPeriodeNummer(POSTS,'posts_order')}}@endif">
 
                             </div>
 
@@ -174,7 +174,7 @@
                             <label class="control-label">{{$web->getLable('status')}} </label>
                             <div>
                                 <input type="checkbox" name="status" data-on-text="{{$web->getLable('on')}}" data-off-text="{{$web->getLable('off')}}" class="make-switch"
-                                    @if($res['active']==0) {{'checked'}} @endif data-on-color="success"
+                                    @if($res['posts_active']==0) {{'checked'}} @endif data-on-color="success"
                                 data-off-color="danger">
                             </div>
                         </div>
@@ -199,6 +199,41 @@
                 </div>
             </div>
 
+            <div class="portlet light">
+                <div class="portlet-title">
+                    <div class="caption">
+                        {{$web->getLable('category')}} </div>
+
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
+
+                    </div>
+                </div>
+
+
+                <div class="portlet-body">
+
+                    <div class="form-body">
+                    <div class="form-control height-auto">
+                    <div class="scroller" style="height:275px;" data-always-visible="1">
+                    
+                        @php
+                            //print_r($cposts);
+                            $tree = $func->buildTree($cat);
+                            $func->printTreechekbox($tree,$r = 0, $p = null,$postid);
+
+                            @endphp
+          
+                    </div>
+                </div>
+
+
+
+                    </div>
+                </div>
+
+            </div>
+
  
             <div class="portlet light">
                 <div class="portlet-title">
@@ -216,11 +251,11 @@
 
                     <div class="form-body">
                         <div class="form-group">
-                            @if(!empty($res['page_image']))
+                            @if(!empty($res['posts_images']))
                             <div class="fileinput fileinput-new" data-provides="fileinput">
                                 <div id="inputimage" class="fileinput-new thumbnail" style="max-width:200px;">
-                                    <img src="{{$res['page_image']}}" alt="" id="image_preview" /> </div>
-                                <input id="image_link" name="link" type="hidden" value="{{$res['page_image']}}">
+                                    <img src="{{$res['posts_images']}}" alt="" id="image_preview" /> </div>
+                                <input id="image_link" name="link" type="hidden" value="{{$res['posts_images']}}">
                                 <div>
                                     <a class="btn iframe-btn default" type="button" href="{{base_url('assets/filemanager/dialog.php?type=1&field_id=image_link&fldr=images')}}">{{$web->getLable('choose_photo')}}</a>
 
@@ -252,7 +287,7 @@
 
         </div>
 
-        <input type="hidden" name="seo_link" id="seo-link" value="{{$res['page_slug_'.$session->userdata('configlang')]}}">
+        <input type="hidden" name="seo_link" id="seo-link" value="{{$res['posts_slug_'.$session->userdata('configlang')]}}">
 
     </form>
 </div>
@@ -267,21 +302,21 @@
         threshold: 5
     });
 
-    $("#page_name").keyup(function (e) {
+    $("#posts_name").keyup(function (e) {
         $('#seo-url').html(slugify($(this).val()) + '/');
         $('#seo-link').val(slugify($(this).val()));
-
         if($("#meta_title").val()==''){
             $('#seo-title').html($(this).val());  
         }else{
             $('#seo-title').html($('#meta_title').val());     
         }
+       
         //    alert($(this).val());
     });
 
     $("#meta_title").keyup(function (e) {
         if($(this).val()==''){
-            $('#seo-title').html($('#page_name').val());   
+            $('#seo-title').html($('#posts_name').val());   
         }else{
            $('#seo-title').html($(this).val());
         }

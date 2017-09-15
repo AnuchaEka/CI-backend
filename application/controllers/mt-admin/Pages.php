@@ -13,7 +13,7 @@ class Pages extends MY_Controller
     {
 
         $data = array(
-            'res' => $this->web->getDataAll(PAGE,$this->input->post('search_keyword'),array('page_name','lastname','email','username'),2),
+            'res' => $this->web->getDataAll(PAGE,$this->input->post('search_keyword'),array('page_name_'.$this->session->configlang),2),
             'msg' => $this->session->tempdata('msg'),
             'error' => $this->session->tempdata('error'),
             'title' => $this->web->getmenuLable(12),
@@ -132,7 +132,7 @@ public function edit($id)
 
     $data = array(
             'res' => $this->web->getDataOne(PAGE,array('pages_id' =>$id),2),
-            'seo' => $this->web->getDataOne(SEO,array('ref_id' =>$id)),
+            'seo' => $this->web->getDataOne(SEO,array('ref_id' =>$id,'lang_iso' =>$this->session->configlang,'page_type'=>'page')),
             'title' => $this->web->getmenuLable(12),
             'msg' => $this->session->tempdata('msg'),
              'ac'=>'4',
@@ -151,6 +151,7 @@ public function action()
             if(count($del)>0){
                 foreach ($del as $key => $value) {
                  if($this->web->deleteData(PAGE,array('pages_id' =>$value))>0){
+                    $this->web->deleteData(SEO,array('ref_id' =>$value,'page_type'=>'page'));
                  $this->session->set_tempdata('msg', $this->web->getLable('msg_delete'), 3);
                  }
 
@@ -171,6 +172,9 @@ public function delete($id)
 {
 
    if($this->web->deleteData(PAGE,array('pages_id' =>$id))>0){
+
+        $this->web->deleteData(SEO,array('ref_id' =>$id,'page_type'=>'page'));
+
          $this->session->set_tempdata('msg', $this->web->getLable('msg_delete'), 3);
 
     redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');

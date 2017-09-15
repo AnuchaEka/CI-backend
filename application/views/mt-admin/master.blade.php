@@ -88,7 +88,7 @@ if (!$authen->loggedin()) {
         <div class="page-header-inner ">
             <!-- BEGIN LOGO -->
             <div class="page-logo">
-                <a href="index.html">
+                <a href="javascript:;">
                         <img src="{{base_url('assets/media/mountain-logo-w.png')}}" alt="logo" width="165" class="logo-default" /> </a>
                 <div class="menu-toggler sidebar-toggler">
                     <span></span>
@@ -105,7 +105,7 @@ if (!$authen->loggedin()) {
                 <ul class="nav navbar-nav pull-right">
                     <!-- BEGIN INBOX DROPDOWN -->
                     <li class="dropdown dropdown-extended dropdown-inbox">
-                        <a href="{{base_url()}}" class="dropdown-toggle">
+                        <a href="{{base_url()}}" target="_blank" class="dropdown-toggle">
                                 <i class="icon-home"></i>
                        
                             </a>

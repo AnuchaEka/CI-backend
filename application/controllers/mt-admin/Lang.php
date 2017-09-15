@@ -89,11 +89,43 @@ public function add()
         'null' => TRUE,
     ),
     );
+
+    $category = array(
+        'cat_name_'.$lang_code => array(
+            'type' => 'VARCHAR',
+            'constraint' => '250',
+            'null' => TRUE,
+    ),
+       'cat_slug_'.$lang_code => array(
+        'type' => 'VARCHAR',
+        'constraint' => '250',
+        'null' => TRUE,
+    ),
+    );
+
+    $posts = array(
+        'posts_name_'.$lang_code => array(
+            'type' => 'VARCHAR',
+            'constraint' => '250',
+            'null' => TRUE,
+    ),
+        'posts_content_'.$lang_code => array(
+            'type' => 'LONGTEXT',
+            'null' => TRUE,
+    ),
+        'posts_slug_'.$lang_code => array(
+            'type' => 'VARCHAR',
+            'constraint' => '250',
+            'null' => TRUE,
+        ),
+    );
         
         $this->web->AddColumn(MENUS,$menus);    
         $this->web->AddColumn(LANGLABEL,$fields);
         $this->web->AddColumn(NAVIGATION,$menuspage);
         $this->web->AddColumn(PAGE,$pages);
+        $this->web->AddColumn(POSTS,$posts);
+        $this->web->AddColumn(CATEGORY,$category);
 
          if(!empty($save)){
          $this->session->set_tempdata('msg', $this->web->getLable('msg_save'), 3);    
@@ -179,10 +211,43 @@ public function edit($id)
                 'null' => TRUE,
             ),
         );
+
+        $posts = array(
+            'posts_name_'.$lang_code => array(
+                'type' => 'VARCHAR',
+                'constraint' => '250',
+                'null' => TRUE,
+        ),
+            'posts_content_'.$lang_code => array(
+                'type' => 'LONGTEXT',
+                'null' => TRUE,
+        ),
+            'posts_slug_'.$lang_code => array(
+                'type' => 'VARCHAR',
+                'constraint' => '250',
+                'null' => TRUE,
+            ),
+        );
+
+        $category = array(
+            'cat_name_'.$lang_code => array(
+                'type' => 'VARCHAR',
+                'constraint' => '250',
+                'null' => TRUE,
+        ),
+           'cat_slug_'.$lang_code => array(
+            'type' => 'VARCHAR',
+            'constraint' => '250',
+            'null' => TRUE,
+        ),
+        );
+
         $this->web->ModifyColumn(MENUS,$menus);
         $this->web->ModifyColumn(LANGLABEL,$fields);
         $this->web->ModifyColumn(NAVIGATION,$menuspage);
         $this->web->ModifyColumn(PAGE,$pages);
+        $this->web->ModifyColumn(POSTS,$posts);
+        $this->web->ModifyColumn(CATEGORY,$category);
 
          if(!empty($save)){
          $this->session->set_tempdata('msg', $this->web->getLable('msg_edit'), 3);    
@@ -228,6 +293,11 @@ public function action()
                  $this->dbforge->drop_column(PAGE, 'page_name_'.$lang_iso);
                  $this->dbforge->drop_column(PAGE, 'page_content_'.$lang_iso);
                  $this->dbforge->drop_column(PAGE, 'page_slug_'.$lang_iso);
+                 $this->dbforge->drop_column(POSTS, 'posts_name_'.$lang_iso);
+                 $this->dbforge->drop_column(POSTS, 'posts_content_'.$lang_iso);
+                 $this->dbforge->drop_column(POSTS, 'posts_slug_'.$lang_iso);
+                 $this->dbforge->drop_column(CATEGORY, 'cat_name_'.$lang_iso);
+                 $this->dbforge->drop_column(CATEGORY, 'cat_slug_'.$lang_iso);
                  $this->session->set_tempdata('msg', $this->web->getLable('msg_delete'), 3);     
                  }
 
@@ -255,6 +325,11 @@ public function delete($id)
          $this->dbforge->drop_column(PAGE, 'page_name_'.$lang_iso);
          $this->dbforge->drop_column(PAGE, 'page_content_'.$lang_iso);
          $this->dbforge->drop_column(PAGE, 'page_slug_'.$lang_iso);
+         $this->dbforge->drop_column(POSTS, 'posts_name_'.$lang_iso);
+         $this->dbforge->drop_column(POSTS, 'posts_content_'.$lang_iso);
+         $this->dbforge->drop_column(POSTS, 'posts_slug_'.$lang_iso);
+         $this->dbforge->drop_column(CATEGORY, 'cat_name_'.$lang_iso);
+         $this->dbforge->drop_column(CATEGORY, 'cat_slug_'.$lang_iso);
          $this->session->set_tempdata('msg', $this->web->getLable('msg_delete'), 3); 
    
     redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');     

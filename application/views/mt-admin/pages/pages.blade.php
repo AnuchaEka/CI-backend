@@ -30,8 +30,6 @@
                                  {{$error}} </div>
                                 @endif
 
-                                
-
                                   <div class="table-container">
                             <div class="pull-right">
                                  <form action="" method="post">
@@ -103,12 +101,12 @@
                                    
                                 </tbody>
                             </table>
-                                
+                            </form>    
                               
                             </div>
                             </div>
                         </div>
-                    </form>
+                   
                 </div>
             </div>
                   @endsection  

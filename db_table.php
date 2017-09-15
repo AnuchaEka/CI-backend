@@ -14,4 +14,8 @@ define('BANNER', 'mt_banner');
 define('NAVIGATION', 'mt_page_menu');
 define('PAGE', 'mt_pages');
 define('SEO', 'mt_seo');
+define('POSTS', 'mt_posts');
+define('CATEGORY', 'mt_category');
+define('POSTMETA', 'mt_postmeta');
+
 ?>

@@ -40,8 +40,11 @@ public function __construct()
   {
    
      if (!empty($table)) {
- 
-        $qr=$this->db->where($object)->order_by('timestamp_create','DESC')->get($table);
+
+      if(!empty($object)){
+        $this->db->where($object);
+      }
+        $qr=$this->db->order_by('timestamp_create','DESC')->get($table);
          if($k==0){
         return $qr->result();
         }else{

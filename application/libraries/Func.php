@@ -27,7 +27,103 @@ class Func {
      
       }
 
+      public function buildTree(Array $data, $parent = 0) {
+          $tree = array();
+         
+          foreach ($data as $d) {
+              if ($d['cat_parent'] == $parent) {
+                  $children = $this->buildTree($data, $d['cat_id']);
+                  // set a trivial key
+                  if (!empty($children)) {
+                      $d['_children'] = $children;
+                  }
+                  $tree[] = $d;
+              }
+          }
+         // print_r($tree);
+          return $tree;
+      }
+      
+      public function printTree($tree, $r = 0, $p = null,$parent=null) {
+        $CI =& get_instance();
+        foreach ($tree as $i => $t) {
+            $dash = ($t['cat_parent'] == 0) ? '' : str_repeat('-', $r) .' ';
+            
+            if($parent == $t['cat_id']){
+              printf("\t<option value='%d' selected>%s%s</option>\n", $t['cat_id'], $dash, $t['cat_name_'.$CI->session->userdata('configlang')]);
+            }else{
+              printf("\t<option value='%d' >%s%s</option>\n", $t['cat_id'], $dash, $t['cat_name_'.$CI->session->userdata('configlang')]);
+            }
+
+            if (isset($t['_children'])) {
+              $this->printTree($t['_children'], $r+1, $t['cat_parent'],$parent); 
+            }
+        }
+    }
+
+    public function printTreechekbox($tree, $r = 0, $p = null,$parent=0) {
+      $CI =& get_instance();
+     
+      foreach ($tree as $i => $t) {
+          $dash = ($t['cat_parent'] == 0) ? '' : str_repeat(' ', $r) .' ';
+
+         $qr= $CI->db->where('post_id',$parent)->where('postmeta_value',$t['cat_id'])->get(POSTMETA)->row();
+         //print_r($t['_children']);
+         //echo $parent;
+        if($t['cat_id']==$qr->postmeta_value){
+          echo "<label class='mt-checkbox mt-checkbox-outline' style='margin-left:".$r."em;margin-bottom:10px;'> ".$dash." ".$t['cat_name_'.$CI->session->userdata('configlang')]."<input type='checkbox' name='category[]' checked value='".$t['cat_id']."'><span></span></label>";
+        }else{
+          echo "<label class='mt-checkbox mt-checkbox-outline' style='margin-left:".$r."em;margin-bottom:10px;'> ".$dash." ".$t['cat_name_'.$CI->session->userdata('configlang')]."<input type='checkbox' name='category[]'  value='".$t['cat_id']."'><span></span></label>";
+        }
+         
+          
+          if (isset($t['_children'])) {
+            $this->printTreechekbox($t['_children'], $r+1.5, $t['cat_parent'],$parent); 
+           
+          }
+
+          }
+  }
+
+  public function printcattable($tree, $r = 0, $p = null,$parent=null) {
+    $CI =& get_instance();
+    foreach ($tree as $i => $t) {
+        $dash = ($t['cat_parent'] == 0) ? '' : str_repeat('-', $r) .' ';
+        
+      
+         echo '<tr><td>
+         <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+             <input type="checkbox" name="del[]" class="checkboxes" value="'.$t["cat_id"].'" />
+             <span></span>
+         </label>
+     </td>
+     <td>
+          <a href="'.base_url("mt-admin/".$CI->uri->segment(2)."/edit/".$t["cat_id"]).'">'.$dash.' '.$t["cat_name_".$CI->session->userdata("configlang")].'</a>
+       
+       </td>
+     
+                               
+     <td>
+         '.$t["cat_slug_".$CI->session->userdata("configlang")].'
+     </td>
+     
+     
+     <td class="text-center">
+        <a href="'.base_url("mt-admin/".$CI->uri->segment(2)."/edit/".$t["cat_id"]).'" class="btn btn-outline btn-circle btn-xs dark">
+           <i class="fa fa-edit"></i> '.$CI->web->getlable("edit").' </a>
+        <a href="'.base_url("mt-admin/".$CI->uri->segment(2)."/delete/".$t["cat_id"]).'" class="btn btn-outline btn-circle red btn-xs blue" data-toggle="confirmation"  data-popout="true" data-placement="left" data-singleton="true" data-title="'.$CI->web->getLable("confirm_delete").'"  data-btn-cancel-label="'.$CI->web->getLable("no").'" data-btn-ok-label="'.$CI->web->getLable("yes").'">
+          <i class="fa fa-trash-o"></i> '.$CI->web->getlable("delete").' </a>   
+     </td></tr>';
+      
+
+        if (isset($t['_children'])) {
+          $this->printcattable($t['_children'], $r+1, $t['cat_parent']); 
+        }
+    }
+}
 
 }
+
+
 
 ?>
