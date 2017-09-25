@@ -1,16 +1,5 @@
 @extends('mt-admin.master') @section('content')
-<div class="page-bar">
-                        <ul class="page-breadcrumb">
-                            <li>
-                                <a href="{{base_url()}}">{{$web->getLable('home')}}</a>
-                                <i class="fa fa-circle"></i>
-                            </li>
-                            <li>
-                                <span>{{$title}}</span>
-                            </li>
-                        </ul>
-                   
-                    </div>
+
 <div class="row">
     <div class="col-md-12">
         <form class="form-horizontal form-row-seperated" action="" id="form_sample_1" method="post" enctype="multipart/form-data">

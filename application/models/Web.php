@@ -8,7 +8,7 @@ public function __construct()
         parent::__construct();
         $this->load->dbforge(); 
     }
-  public function getDataAll($table,$keyword=null,$fields=null,$k=0)
+  public function getDataAll($table,$keyword=null,$fields=null,$k=0,$order=null)
   {
    
      if (!empty($table)) {
@@ -23,8 +23,12 @@ public function __construct()
           }
         }
         
+        if(!is_null($order)){
 
-        $qr=$this->db->order_by('timestamp_create','DESC')->get($table);
+          $this->db->order_by($order[0],$order[1]);
+        }
+
+        $qr=$this->db->get($table);
         if($k==0){
         return $qr->result();
         }else{
@@ -36,7 +40,7 @@ public function __construct()
   }
 
 
-  public function getDataWhere($table,$object=null,$k=0)
+  public function getDataWhere($table,$object=null,$k=0,$order=null)
   {
    
      if (!empty($table)) {
@@ -44,7 +48,12 @@ public function __construct()
       if(!empty($object)){
         $this->db->where($object);
       }
-        $qr=$this->db->order_by('timestamp_create','DESC')->get($table);
+
+      if(!is_null($order)){
+         $this->db->order_by($order[0],$order[1]);
+        }
+
+        $qr=$this->db->get($table);
          if($k==0){
         return $qr->result();
         }else{
@@ -97,6 +106,7 @@ public function __construct()
       $this->db->join(PERMISION.' p', 'p.menu_id=m.menu_id', 'left');
       $this->db->where('p.groupusers_id',$user['group_id']);
       $this->db->where('m.menu_parent',$parent);
+      $this->db->where('m.active',0);
       $this->db->order_by('m.menu_sorting','asc');         
       $query = $this->db->get(); 
 

@@ -11,12 +11,78 @@ class Navigation extends MY_Controller
     }
     public function index()
     {
-      
+        if($post=$this->input->post()){
+            extract($post);
+            if($save=='selectmenu'){
+                if($this->web->updateData(PAGEMENUS,array('active'=>0),array('active'=>1))){
+                    
+                           if($this->web->updateData(PAGEMENUS,array('active'=>1),array('page_menu_id'=>$menus))){
+                             redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');
+                             
+                             }
+                             
+                   }
+            }
+
+            if($save=='addnew'){
+                
+                 $ins=array(
+                     'page_menu_name'=>$menuname,
+                   );
+             $id=$this->web->insertData(PAGEMENUS,$ins); 
+ 
+             if(!empty($id)){
+   
+                if($this->web->updateData(PAGEMENUS,array('active'=>0),array('active'=>1))){
+                    
+                           if($this->web->updateData(PAGEMENUS,array('active'=>1),array('page_menu_id'=>$id))){
+                             redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');
+                             
+                             }
+                             
+                   }
+                          
+              }
+             }
+
+            if($save=='acpages'){
+               
+                $ins=array(
+                    'page_menu_id'=>$menuid,
+                    'menulist_type'=>'page',
+                    'timestamp_create'=>date('Y-m-d H:i:s'),
+                    'timestamp_update'=>date('Y-m-d H:i:s'),
+                    // 'page_refid'=>,
+                    // 'menulist_link'=>,
+                    // 'menulist_order'=>,
+                    // 'menulist_parent'=>0,
+                );
+            $id=$this->web->insertData(PAGEMENUSLIST,$ins); 
+
+            if(!empty($id)){
+  
+              redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');
+                         
+             }
+            }
+
+
+           
+                
+           }
+
+         
         $data = array(
             'res' => $this->web->getDataAll(BANNER,$this->input->post('search_keyword'),array('slideImage','slideLink')),
             'msg' => $this->session->tempdata('msg'),
             'error' => $this->session->tempdata('error'),
             'title' => $this->web->getmenuLable(28),
+            'cat' =>$this->web->getDataWhere(CATEGORY,'',2),
+            'page' =>$this->web->getDataWhere(PAGE,'',2),
+            'post' =>$this->web->getDataWhere(POSTS,'',2),
+            'pagemenus' =>$this->web->getDataWhere(PAGEMENUS,'',2),
+            'optionmenu'=>$this->web->getDataWhere(PAGEMENUSOPTION,'',2),
+            'res' => $this->web->getDataOne(PAGEMENUS,array('active' =>1),2),
             'ac'=>'10',
             'sac'=>'28'
         );
@@ -108,38 +174,15 @@ public function edit($id)
         echo $this->blade->view()->make('mt-admin.layouts.bannerslideform', $data)->render();
 }
 
-public function action()
-{
-    //print_r($this->input->post());
-    if($post=$this->input->post()){
-        extract($post);
-        if(!empty($action)){
-        if($action=='Del'){
-            if(count($del)>0){
-                foreach ($del as $key => $value) {
-
-                 if($this->web->deleteData(BANNER,array('slideID' =>$value))>0){
-      
-                 $this->session->set_tempdata('msg', $this->web->getLable('msg_delete'), 3);     
-                 }
-
-                }
-                 redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');     
-            }else{
-                 redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');  
-            }
-        }
-        }else{
-           redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');  
-        }
-    }
-   //echo "DELETE";
-}
 
 public function delete($id)
 {
 
-   if($this->web->deleteData(BANNER,array('slideID' =>$id))>0){
+   if($this->web->deleteData(PAGEMENUS,array('page_menu_id' =>$id))>0){
+
+    $rs=$this->web->getDataOne(PAGEMENUS,array('active' =>0),2);
+
+    $this->web->updateData(PAGEMENUS,array('active'=>1),array('page_menu_id'=>$rs['page_menu_id']));
 
     $this->session->set_tempdata('msg', $this->web->getLable('msg_delete'), 3); 
    

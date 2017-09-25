@@ -54,7 +54,7 @@
                                         <div class="col-md-8">
                                             <div class="mt-checkbox-list">
                                                 @php
-                                                $qr=$web->getDataWhere(MENUS,array('menu_parent'=>0,'menu_status'=>'ทั้งหมด'),1);
+                                                $qr=$web->getDataWhere(MENUS,array('menu_parent'=>0,'menu_status'=>'ทั้งหมด','active'=>0),1);
 
                                                 @endphp
 
@@ -66,7 +66,7 @@
 
 
                                                 @php
-                                                $qrsub=$web->getDataWhere(MENUS,array('menu_parent'=>$menu['menu_id'],'menu_status'=>'ทั้งหมด'),1);
+                                                $qrsub=$web->getDataWhere(MENUS,array('menu_parent'=>$menu['menu_id'],'menu_status'=>'ทั้งหมด','active'=>0),1);
 
                                                 @endphp
                                                 @if(count($qrsub)>0)

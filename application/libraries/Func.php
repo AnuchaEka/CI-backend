@@ -71,9 +71,9 @@ class Func {
          //print_r($t['_children']);
          //echo $parent;
         if($t['cat_id']==$qr->postmeta_value){
-          echo "<label class='mt-checkbox mt-checkbox-outline' style='margin-left:".$r."em;margin-bottom:10px;'> ".$dash." ".$t['cat_name_'.$CI->session->userdata('configlang')]."<input type='checkbox' name='category[]' checked value='".$t['cat_id']."'><span></span></label>";
+          echo "<label class='mt-checkbox mt-checkbox-outline' style='margin-left:".$r."em;margin-bottom:10px;'> ".$dash." ".$t['cat_name_'.$CI->session->userdata('configlang')]."<input type='checkbox' name='category[]' checked value='".$t['cat_id']."'><span></span></label><br>";
         }else{
-          echo "<label class='mt-checkbox mt-checkbox-outline' style='margin-left:".$r."em;margin-bottom:10px;'> ".$dash." ".$t['cat_name_'.$CI->session->userdata('configlang')]."<input type='checkbox' name='category[]'  value='".$t['cat_id']."'><span></span></label>";
+          echo "<label class='mt-checkbox mt-checkbox-outline' style='margin-left:".$r."em;margin-bottom:10px;'> ".$dash." ".$t['cat_name_'.$CI->session->userdata('configlang')]."<input type='checkbox' name='category[]'  value='".$t['cat_id']."'><span></span></label><br>";
         }
          
           

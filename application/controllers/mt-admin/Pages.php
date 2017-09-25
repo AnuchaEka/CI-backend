@@ -13,7 +13,7 @@ class Pages extends MY_Controller
     {
 
         $data = array(
-            'res' => $this->web->getDataAll(PAGE,$this->input->post('search_keyword'),array('page_name_'.$this->session->configlang),2),
+            'res' => $this->web->getDataAll(PAGE,$this->input->post('search_keyword'),array('page_name_'.$this->session->configlang),2,array('page_order','asc')),
             'msg' => $this->session->tempdata('msg'),
             'error' => $this->session->tempdata('error'),
             'title' => $this->web->getmenuLable(12),

@@ -217,7 +217,7 @@
                     <div class="form-control height-auto">
                     <div class="scroller" style="height:275px;" data-always-visible="1">
                     
-                        @php
+                            @php
                             //print_r($cposts);
                             $tree = $func->buildTree($cat);
                             $func->printTreechekbox($tree,$r = 0, $p = null,$postid);

@@ -199,6 +199,45 @@
                 </div>
             </div>
 
+            <!-- <div class="portlet light">
+                <div class="portlet-title">
+                    <div class="caption">
+                    {{$web->getLable('page_layout')}} </div>
+
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
+
+                    </div>
+                </div>
+
+
+                <div class="portlet-body">
+
+                    <div class="form-body">
+                        <div class="form-group">
+
+                        <div class="mt-radio-list">
+                             <label class="mt-radio mt-radio-outline"> Radio 1
+                               <input type="radio" value="1" name="test" />
+                                <span></span>
+                             </label>
+                             <label class="mt-radio mt-radio-outline"> Radio 1
+                               <input type="radio" value="1" name="test" />
+                                <span></span>
+                             </label>
+                             <label class="mt-radio mt-radio-outline"> Radio 1
+                               <input type="radio" value="1" name="test" />
+                                <span></span>
+                             </label>
+
+                         </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div> -->
+
  
             <div class="portlet light">
                 <div class="portlet-title">

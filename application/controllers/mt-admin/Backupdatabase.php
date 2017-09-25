@@ -13,7 +13,7 @@ class Backupdatabase extends MY_Controller
     {
       
         $data = array(
-            'res' => $this->web->getDataAll(BACKUPDB,$this->input->post('search_keyword'),array('backup_filename')),
+            'res' => $this->web->getDataAll(BACKUPDB,$this->input->post('search_keyword'),array('backup_filename'),0,array('timestamp_create','desc')),
             'msg' => $this->session->tempdata('msg'),
             'error' => $this->session->tempdata('error'),
             'title' => $this->web->getmenuLable(39),

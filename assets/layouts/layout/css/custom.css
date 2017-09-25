@@ -56,3 +56,17 @@ td{
 .control-label{
   font-weight: bold;
 }
+
+.panel-collapse{
+  border: 1px solid #ccc;
+  border-top:none;
+}
+.dd3-content{
+  margin: 5px 0 0 0;
+}
+.accordionborder{
+  border: 1px solid #ddd;
+}
+.panel-heading {
+  background: #fff;
+}

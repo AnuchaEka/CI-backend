@@ -17,5 +17,7 @@ define('SEO', 'mt_seo');
 define('POSTS', 'mt_posts');
 define('CATEGORY', 'mt_category');
 define('POSTMETA', 'mt_postmeta');
-
+define('PAGEMENUS', 'mt_page_menu');
+define('PAGEMENUSOPTION', 'mt_page_menuoption');
+define('PAGEMENUSLIST', 'mt_page_menulist');
 ?>

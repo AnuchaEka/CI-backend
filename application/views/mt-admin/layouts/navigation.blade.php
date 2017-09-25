@@ -1,186 +1,282 @@
-@extends('mt-admin.master')
+@extends('mt-admin.master') @section('css')
+<link href="{{base_url('assets/global/plugins/jquery-nestable/jquery.nestable.css')}}" rel="stylesheet" type="text/css" /> @endsection @section('content')
+<div class="row">
 
-@section('css')
-<link href="{{base_url('assets/global/plugins/jquery-nestable/jquery.nestable.css')}}" rel="stylesheet" type="text/css" />
-@endsection
-
- @section('content')
- <div class="row">
-                        <div class="col-md-12">
-                            <form class="form-horizontal form-row-seperated" action="" id="form_sample_1" method="post">
-                                <div class="portlet light">
-                                    <div class="portlet-title">
-                                        <div class="caption">
-                                            <i class="icon-magic-wand"></i>{{$title}} </div>
-                                            @if(sizeof($res)>0)
-                                                    <div class="actions btn-set">
-                                                            
-                                                                <a href="{{base_url('mt-admin/'.$uri->segment(2).'/add')}}" class="btn default btn-secondary-outline">
-                                                                    {{$web->getLable('add')}} <i class="fa fa-plus"></i></a>
-                                                        
-                                                            
-                                                </div>    
-                                                @endif       
-                                       
-                                    </div>
-                                    <div class="portlet-body">
-                                         @if(!empty($msg))
-                                          <div class="alert alert-success alert-dismissable">
-                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
-                                         {{$msg}} </div>
-                                        @endif
-                                         @if(!empty($error))
-                                           <div class="alert alert-danger alert-dismissable">
-                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
-                                         {{$error}} </div>
-                                        @endif
-                            
-                                        <div class="row">
-                        <div class="col-md-6">
-                            <div class="portlet light bordered">
-                                <div class="portlet-title">
-                                    <div class="caption">
-                                        <i class="icon-bubble font-green"></i>
-                                        <span class="caption-subject font-green sbold uppercase">Nestable List 1</span>
-                                    </div>
-                                    <div class="actions">
-                                        <div class="btn-group">
-                                            <a class="btn green-haze btn-outline btn-circle btn-sm" href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Actions
-                                                <i class="fa fa-angle-down"></i>
-                                            </a>
-                                            <ul class="dropdown-menu pull-right">
-                                                <li>
-                                                    <a href="javascript:;"> Option 1</a>
-                                                </li>
-                                                <li class="divider"> </li>
-                                                <li>
-                                                    <a href="javascript:;">Option 2</a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:;">Option 3</a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:;">Option 4</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="portlet-body ">
-                                    <div class="dd" id="nestable_list_1">
-                                        <ol class="dd-list">
-                                            <li class="dd-item" data-id="1">
-                                                <div class="dd-handle"> Item 1 </div>
-                                            </li>
-                                            <li class="dd-item" data-id="2">
-                                                <div class="dd-handle"> Item 2 </div>
-                                                <ol class="dd-list">
-                                                    <li class="dd-item" data-id="3">
-                                                        <div class="dd-handle"> Item 3 </div>
-                                                    </li>
-                                                    <li class="dd-item" data-id="4">
-                                                        <div class="dd-handle"> Item 4 </div>
-                                                    </li>
-                                                    <li class="dd-item" data-id="5">
-                                                        <div class="dd-handle"> Item 5 </div>
-                                                        <ol class="dd-list">
-                                                            <li class="dd-item" data-id="6">
-                                                                <div class="dd-handle"> Item 6 </div>
-                                                            </li>
-                                                            <li class="dd-item" data-id="7">
-                                                                <div class="dd-handle"> Item 7 </div>
-                                                            </li>
-                                                            <li class="dd-item" data-id="8">
-                                                                <div class="dd-handle"> Item 8 </div>
-                                                            </li>
-                                                        </ol>
-                                                    </li>
-                                                    <li class="dd-item" data-id="9">
-                                                        <div class="dd-handle"> Item 9 </div>
-                                                    </li>
-                                                    <li class="dd-item" data-id="10">
-                                                        <div class="dd-handle"> Item 10 </div>
-                                                    </li>
-                                                </ol>
-                                            </li>
-                                            <li class="dd-item" data-id="11">
-                                                <div class="dd-handle"> Item 11 </div>
-                                            </li>
-                                            <li class="dd-item" data-id="12">
-                                                <div class="dd-handle"> Item 12 </div>
-                                            </li>
-                                        </ol>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="portlet light bordered">
-                                <div class="portlet-title">
-                                    <div class="caption">
-                                        <i class="icon-bubble font-red"></i>
-                                        <span class="caption-subject font-red sbold uppercase">Nestable List 2</span>
-                                    </div>
-                                    <div class="tools">
-                                        <a href="" class="collapse"> </a>
-                                        <a href="#portlet-config" data-toggle="modal" class="config"> </a>
-                                        <a href="" class="reload"> </a>
-                                        <a href="" class="remove"> </a>
-                                    </div>
-                                </div>
-                                <div class="portlet-body">
-                                    <div class="dd" id="nestable_list_2">
-                                        <ol class="dd-list">
-                                            <li class="dd-item" data-id="13">
-                                                <div class="dd-handle"> Item 13 </div>
-                                            </li>
-                                            <li class="dd-item" data-id="14">
-                                                <div class="dd-handle"> Item 14 </div>
-                                            </li>
-                                            <li class="dd-item" data-id="15">
-                                                <div class="dd-handle"> Item 15 </div>
-                                                <ol class="dd-list">
-                                                    <li class="dd-item" data-id="16">
-                                                        <div class="dd-handle"> Item 16 </div>
-                                                    </li>
-                                                    <li class="dd-item" data-id="17">
-                                                        <div class="dd-handle"> Item 17 </div>
-                                                    </li>
-                                                    <li class="dd-item" data-id="18">
-                                                        <div class="dd-handle"> Item 18 </div>
-                                                    </li>
-                                                </ol>
-                                            </li>
-                                        </ol>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                                    </div>
-                                      <div class="portlet-title">
-
-                                        <div class="actions btn-set">
-                                          
-                                            <button type="button" onclick="window.location='{{base_url('mt-admin/'.$uri->segment(2))}}'" name="back" class="btn btn-secondary-outline">
-                                                <i class="fa fa-angle-left"></i> {{$web->getLable('back')}}</button>
+<form class="form-horizontal" action="" id="form_sample_1" method="post" enctype="multipart/form-data">
+    <div class="col-md-12">
+        <div class="portlet light">
+            <div class="portlet-title">
+            <div class="form-group">
+            <label class="control-label col-md-2">เลือกเมนูที่จะแก้ไข </label>
+                <div class="col-md-4">
+                <select class=" form-control" name="menus">
+                          @foreach($pagemenus as $rsmenu)
+                         <option @if($rsmenu['active']==1) selected @endif value="{{$rsmenu['page_menu_id']}}">{{$rsmenu['page_menu_name']}}</option>
+                         @endforeach
+                     </select>
+                    
+            </div>
+            <button class="btn btn-success" type="submit" name="save" value="selectmenu"> {{$web->getLable('select')}}</button>
+            หรือ <a  data-toggle="modal" href="#basic">สร้างเมนูใหม่</a>
+            </div>
     
-                                            <button class="btn btn-success" type="submit" name="save" value="1">
-                                                <i class="fa fa-check"></i> {{$web->getLable('save')}}</button>
-                                            <button class="btn btn-success" type="submit" name="save_continue" value="1">
-                                                <i class="fa fa-check-circle"></i> {{$web->getLable('save_continue')}}</button>
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                            
-                        </div>
-                    </div>
-                     @endsection  
+            </div>
+        </div>
+    </div>
+    </form>
 
-        @section('script')              
-        <script src="../assets/global/plugins/jquery-nestable/jquery.nestable.js" type="text/javascript"></script>
-        <script src="../assets/pages/scripts/ui-nestable.js" type="text/javascript"></script>
-        @endsection  
+    <form class="form-horizontal" action="" id="form_sample_1" method="post" enctype="multipart/form-data">
+
+        <div class="col-md-4">
+            <div class="portlet light">
+                <div class="portlet-title">
+                <div class="caption">
+                <i class="icon-doc"></i>{{$title}} </div>
+
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
+
+                    </div>
+                </div>
+
+
+                <div class="portlet-body">
+                <div style="margin-bottom:15px;">
+                            <label class="control-label">{{$web->getLable('language_name')}} </label>
+                            <select class=" form-control" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+                         @foreach($web->getDataWhere(LANG,array('active'=>0),1) as $val)
+                         <option @if($session->userdata('configlang')==$val['lang_iso']) selected @endif value="{{'?lang='.$val['lang_iso']}}">{{$val['lang_name']}}</option>
+                         @endforeach
+                     </select>
+                      </div>
+                        <div class="panel-heading accordionborder">
+                            <h4 class="panel-title">
+                            หน้า<a class="accordion-toggle pull-right" data-toggle="collapse" data-parent="#pages" href="#pages"><i class="fa fa-sort-down"></i></a>
+                            </h4>
+                        </div>
+                            <div id="pages" class="panel-collapse collapse">
+                            <div class="panel-body" >
+                            <div class="portlet-title">
+
+                            <div style="height:200px; overflow-y:auto;">
+                            
+                            @foreach($page as $rspage)
+                            <label class='mt-checkbox mt-checkbox-outline'>{{$rspage['page_name_'.$session->userdata('configlang')]}}<input type='checkbox' name='page[]'  value='{{$rspage["pages_id"]}}'><span></span></label><br>
+
+                            @endforeach
+                            </div>
+
+                                <div class="actions btn-set pull-right">
+
+                                    <button class="btn btn-success" type="submit" name="save" value="acpages">
+                                                        <i class="fa fa-check"></i> {{$web->getLable('add_menu')}}</button>
+
+
+                                </div>
+                            </div> 
+                            </div>
+                        </div>
+                        <div class="panel-heading accordionborder">
+                            <h4 class="panel-title">
+                            เรื่อง  <a class="accordion-toggle pull-right" data-toggle="collapse" data-parent="#posts" href="#posts"><i class="fa fa-sort-down"></i></a>
+                            </h4>
+                        </div>
+                        <div id="posts" class="panel-collapse collapse">
+                        <div class="panel-body" >
+                        <div class="portlet-title ">
+
+                        <div style="height:200px; overflow-y:auto;">
+                        @foreach($post as $rspost)
+                            <label class='mt-checkbox mt-checkbox-outline'>{{$rspost['posts_name_'.$session->userdata('configlang')]}}<input type='checkbox' name='post[]'  value='{{$rspost["posts_id"]}}'><span></span></label><br>
+
+                            @endforeach
+                        
+                        </div>
+
+                            <div class="actions btn-set pull-right">
+
+                                <button class="btn btn-success" type="submit" name="save" value="acposts">
+                                                    <i class="fa fa-check"></i> {{$web->getLable('add_menu')}}</button>
+
+
+                            </div>
+                        </div> 
+                        </div>
+                        </div>
+
+                        <div class="panel-heading accordionborder">
+                            <h4 class="panel-title">
+                            ปรับแต่งลิงก์  <a class="accordion-toggle pull-right" data-toggle="collapse" data-parent="#customlink" href="#customlink"><i class="fa fa-sort-down"></i></a>
+                            </h4>
+                        </div>
+                        <div id="customlink" class="panel-collapse collapse">
+                        <div class="panel-body" >
+                        <div class="portlet-title">
+
+                        <div >
+                        <div class="form-body">
+                    
+                        <div class="form-group">
+                           <label class="control-label col-md-3">URL </label>
+                               <div class="col-md-9">
+                                  <input type="text" name="name"  class="form-control"> 
+                         </div>
+                       </div>
+                 
+                       <div class="form-group">
+                           <label class="control-label col-md-3">หัวข้อ </label>
+                               <div class="col-md-9">
+                                  <input type="text" name="name"  class="form-control"> </div>
+                       </div>
+                       </div>
+                        
+                        </div>
+
+                            <div class="actions btn-set pull-right">
+
+                                <button class="btn btn-success" type="submit" name="save" value="accustomlink">
+                                                    <i class="fa fa-check"></i> {{$web->getLable('add_menu')}}</button>
+
+
+                            </div>
+                        </div> 
+                        </div>
+                        </div>
+
+                        <div class="panel-heading accordionborder">
+                            <h4 class="panel-title">
+                            หมวดหมู่  <a class="accordion-toggle pull-right" data-toggle="collapse" data-parent="#category" href="#category"><i class="fa fa-sort-down"></i></a>
+                            </h4>
+                        </div>
+                        <div id="category" class="panel-collapse collapse">
+                            <div class="panel-body" >
+                            <div class="portlet-title">
+
+                            <div style="height:200px; overflow-y:auto;">
+                            @php
+                            //print_r($cposts);
+                            $tree = $func->buildTree($cat);
+                            $func->printTreechekbox($tree,$r = 0, $p = null,$postid);
+
+                            @endphp
+                            </div>
+
+                                <div class="actions btn-set pull-right">
+
+                                    <button class="btn btn-success" type="submit" name="save" value="accategory">
+                                                        <i class="fa fa-check"></i> {{$web->getLable('add_menu')}}</button>
+
+
+                                </div>
+                            </div> 
+                            </div>
+                              
+                        </div>
+
+
+                </div>
+                
+            </div>
+            <input type="hidden" name="menuid" id="menuid" value="{{$res['page_menu_id']}}">
+
+
+
+        </div>
+    </form>
+    <form class="form-horizontal" action="" id="form_sample_1" method="post" enctype="multipart/form-data">
+    <div class="col-md-8">
+        <div class="portlet light">
+            <div class="portlet-title">
+            <div class="form-group">
+            <label class="control-label pull-left">ชื่อเมนู </label>
+                <div class="col-md-4">
+                   <input type="text" name="name"  class="form-control input-sm" value="{{$res['page_menu_name']}}"> 
+                   <input type="hidden" name="menuid" id="menuid" value="{{$res['page_menu_id']}}">
+            </div>
+            </div>
+
+    
+
+            </div>
+
+            <div class="portlet-body form">
+                @if(!empty($msg))
+                <div class="alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button> {{$msg}} </div>
+                @endif @if(!empty($error))
+                <div class="alert alert-danger alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button> {{$error}}
+                </div>
+                @endif
+
+                <div class="dd" id="nestable_list_1">
+                  
+
+                </div>
+
+                <h4>ตั้งค่าเมนู</h4>
+                @foreach($optionmenu as $rsoptionmenu)
+
+                <label class='mt-checkbox mt-checkbox-outline'>{{$rsoptionmenu['menu_option_name']}}<input type='checkbox' name="optionmenu[{{$rsoptionmenu['menu_option_key']}}]" @if($rsoptionmenu['page_menu_id']==$res['page_menu_id']){{'checked'}} @endif value='{{$rsoptionmenu["posts_id"]}}'><span></span></label><br>
+
+                @endforeach
+                
+
+            </div>
+
+            <div class="portlet-title">
+
+                    <div class="actions btn-set">
+
+                        <a class="btn btn-danger" href="{{base_url('mt-admin/'.$uri->segment(2).'/delete/'.$res['page_menu_id'])}}" data-toggle="confirmation"  data-popout="true" data-placement="left" data-singleton="true" data-title="{{$web->getLable('confirm_delete')}}"  data-btn-cancel-label="{{$web->getLable('no')}}" data-btn-ok-label="{{$web->getLable('yes')}}">
+                                                <i class="fa fa-close"></i> {{$web->getLable('delete')}}</a>
+
+                        <button class="btn btn-success" type="submit" name="save" value="Publish">
+                                                <i class="fa fa-check"></i> {{$web->getLable('save')}}</button>
+
+
+                    </div>
+                </div>
+
+        </div>
+
+
+    </div>
+    </form>
+
+</div>
+
+
+<div class="modal fade" id="basic" tabindex="-1" role="basic" aria-hidden="true">
+ <div class="modal-dialog">
+   <div class="modal-content">
+   <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+      <div class="modal-header">
+         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+         <h4 class="modal-title">สร้างเมนูใหม่</h4>
+      </div>
+        <div class="modal-body">
+        <div class="form-group">
+            <label class="control-label col-md-2">ชื่อเมนู </label>
+                <div class="col-md-9">
+                   <input type="text" name="menuname"  class="form-control input-sm" value=""> 
+ 
+            </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn dark btn-outline" data-dismiss="modal">{{$web->getLable('close')}}</button>
+            <button type="submit" name="save" value="addnew" class="btn green">{{$web->getLable('save')}}</button>
+        </div>
+        </form>
+     </div>
+                                            <!-- /.modal-content -->
+    </div>
+                                        <!-- /.modal-dialog -->
+  </div>
+                                    <!-- /.modal -->
+
+@endsection @section('script')
+<script src="../assets/global/plugins/jquery-nestable/jquery.nestable.js" type="text/javascript"></script>
+<script src="../assets/pages/scripts/ui-nestable.js" type="text/javascript"></script>
+@endsection

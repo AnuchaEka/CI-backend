@@ -65,13 +65,6 @@ public function add()
                 ),
         );
 
-        $menuspage = array(
-            'menu_name_'.$lang_code => array(
-                'type' => 'VARCHAR',
-                'constraint' => '250',
-                'null' => TRUE,
-        ),
-);
 
     $pages = array(
         'page_name_'.$lang_code => array(
@@ -122,7 +115,6 @@ public function add()
         
         $this->web->AddColumn(MENUS,$menus);    
         $this->web->AddColumn(LANGLABEL,$fields);
-        $this->web->AddColumn(NAVIGATION,$menuspage);
         $this->web->AddColumn(PAGE,$pages);
         $this->web->AddColumn(POSTS,$posts);
         $this->web->AddColumn(CATEGORY,$category);
@@ -187,14 +179,6 @@ public function edit($id)
                 ),
         );
 
-        $menuspage = array(
-            'menu_name_'.$lang_oldcode => array(
-                'name' => 'menu_name_'.$lang_code,
-                'type' => 'VARCHAR',
-                'constraint' => '250',
-                'null' => TRUE
-        ),
-);
         $pages = array(
             'page_name_'.$lang_code => array(
                 'type' => 'VARCHAR',
@@ -244,7 +228,6 @@ public function edit($id)
 
         $this->web->ModifyColumn(MENUS,$menus);
         $this->web->ModifyColumn(LANGLABEL,$fields);
-        $this->web->ModifyColumn(NAVIGATION,$menuspage);
         $this->web->ModifyColumn(PAGE,$pages);
         $this->web->ModifyColumn(POSTS,$posts);
         $this->web->ModifyColumn(CATEGORY,$category);
@@ -289,7 +272,6 @@ public function action()
                  if($this->web->deleteData(LANG,array('lang_iso_id' =>$value,'lang_default !='=>1))>0){
                  $this->dbforge->drop_column(LANGLABEL, 'lang_'.$lang_iso);
                  $this->dbforge->drop_column(MENUS, 'menu_name_'.$lang_iso);
-                 $this->dbforge->drop_column(NAVIGATION, 'menu_name_'.$lang_iso);
                  $this->dbforge->drop_column(PAGE, 'page_name_'.$lang_iso);
                  $this->dbforge->drop_column(PAGE, 'page_content_'.$lang_iso);
                  $this->dbforge->drop_column(PAGE, 'page_slug_'.$lang_iso);
@@ -321,7 +303,6 @@ public function delete($id)
    if($this->web->deleteData(LANG,array('lang_iso_id' =>$id,'lang_default !='=>1))>0){
          $this->dbforge->drop_column(LANGLABEL, 'lang_'.$lang_iso);
          $this->dbforge->drop_column(MENUS, 'menu_name_'.$lang_iso);
-         $this->dbforge->drop_column(NAVIGATION, 'menu_name_'.$lang_iso);
          $this->dbforge->drop_column(PAGE, 'page_name_'.$lang_iso);
          $this->dbforge->drop_column(PAGE, 'page_content_'.$lang_iso);
          $this->dbforge->drop_column(PAGE, 'page_slug_'.$lang_iso);
