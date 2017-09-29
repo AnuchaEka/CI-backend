@@ -271,6 +271,22 @@ public function getmenuLable($id)
   return $res['menu_name_'.$this->session->weblang];
 }
 
+public function printTreemenu($tree) {
+
+  foreach ($tree as $i => $t) {
+
+    echo  $t['id'];
+
+    if (isset($t['children'])) {
+        $this->printTreemenu($t['children']); 
+    }
+ 
+  }
+
+
+
+}
+
 }
 
 /* End of file ModelName.php */

@@ -9,7 +9,7 @@ var UINestable = function () {
             $("#nestable_list_1").nestable({
                 group: 1,
                 maxDepth : 10,
-            })
+            }).on("change", t), t($("#nestable_list_1").data("output", $("#nestable_list_1_output")))
         }
     }
 }();

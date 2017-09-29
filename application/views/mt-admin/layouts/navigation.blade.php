@@ -2,11 +2,12 @@
 <link href="{{base_url('assets/global/plugins/jquery-nestable/jquery.nestable.css')}}" rel="stylesheet" type="text/css" /> @endsection @section('content')
 <div class="row">
 
-<form class="form-horizontal" action="" id="form_sample_1" method="post" enctype="multipart/form-data">
+<form  action="" id="form_sample_1" method="post" enctype="multipart/form-data">
     <div class="col-md-12">
         <div class="portlet light">
             <div class="portlet-title">
             <div class="form-group">
+            @if(sizeof($pagemenus) >0)
             <label class="control-label col-md-2">เลือกเมนูที่จะแก้ไข </label>
                 <div class="col-md-4">
                 <select class=" form-control" name="menus">
@@ -17,14 +18,17 @@
                     
             </div>
             <button class="btn btn-success" type="submit" name="save" value="selectmenu"> {{$web->getLable('select')}}</button>
-            หรือ <a  data-toggle="modal" href="#basic">สร้างเมนูใหม่</a>
+            @endif
+
+
+            <a class="btn btn-success" data-toggle="modal" href="#basic">สร้างเมนูใหม่</a>
             </div>
     
             </div>
         </div>
     </div>
     </form>
-
+   
     <form class="form-horizontal" action="" id="form_sample_1" method="post" enctype="multipart/form-data">
 
         <div class="col-md-4">
@@ -87,7 +91,7 @@
 
                         <div style="height:200px; overflow-y:auto;">
                         @foreach($post as $rspost)
-                            <label class='mt-checkbox mt-checkbox-outline'>{{$rspost['posts_name_'.$session->userdata('configlang')]}}<input type='checkbox' name='post[]'  value='{{$rspost["posts_id"]}}'><span></span></label><br>
+                            <label class='mt-checkbox mt-checkbox-outline'>{{$rspost['posts_name_'.$session->userdata('configlang')]}}<input type='checkbox' name='posts[]'  value='{{$rspost["posts_id"]}}'><span></span></label><br>
 
                             @endforeach
                         
@@ -119,14 +123,14 @@
                         <div class="form-group">
                            <label class="control-label col-md-3">URL </label>
                                <div class="col-md-9">
-                                  <input type="text" name="name"  class="form-control"> 
+                                  <input type="url" name="url" data-parsley-type="url"  class="form-control" value="{{($_SERVER['SERVER_PORT'] == 443 ? 'https' : 'http')}}://" required> 
                          </div>
                        </div>
                  
                        <div class="form-group">
                            <label class="control-label col-md-3">หัวข้อ </label>
                                <div class="col-md-9">
-                                  <input type="text" name="name"  class="form-control"> </div>
+                                  <input type="text" name="title"  class="form-control" required> </div>
                        </div>
                        </div>
                         
@@ -183,7 +187,8 @@
 
         </div>
     </form>
-    <form class="form-horizontal" action="" id="form_sample_1" method="post" enctype="multipart/form-data">
+    
+    <form  action="{{base_url($uri->slash_segment(1).$uri->slash_segment(2).'add')}}" id="form_sample_1" method="post" enctype="multipart/form-data">
     <div class="col-md-8">
         <div class="portlet light">
             <div class="portlet-title">
@@ -209,15 +214,21 @@
                 </div>
                 @endif
 
-                <div class="dd" id="nestable_list_1">
-                  
+                <div class="dd" id="nestable">
 
+                @php
+                 $menus=$web->getDataWhere(PAGEMENUSLIST,array('page_menu_id'=>$res['page_menu_id']),2,array('menulist_order','asc'));
+                 $tree = $func->buildTreemenu($menus);
+                 $func->printTreemenu($tree);
+
+                 @endphp
+         
                 </div>
 
                 <h4>ตั้งค่าเมนู</h4>
                 @foreach($optionmenu as $rsoptionmenu)
 
-                <label class='mt-checkbox mt-checkbox-outline'>{{$rsoptionmenu['menu_option_name']}}<input type='checkbox' name="optionmenu[{{$rsoptionmenu['menu_option_key']}}]" @if($rsoptionmenu['page_menu_id']==$res['page_menu_id']){{'checked'}} @endif value='{{$rsoptionmenu["posts_id"]}}'><span></span></label><br>
+                <label class='mt-checkbox mt-checkbox-outline'>{{$rsoptionmenu['menu_option_name']}}<input type='checkbox' name="optionmenu[{{$rsoptionmenu['menu_option_key']}}]" @if($rsoptionmenu['page_menu_id']==$res['page_menu_id']){{'checked'}} @endif value="{{$res['page_menu_id']}}"><span></span></label><br>
 
                 @endforeach
                 
@@ -242,6 +253,8 @@
 
 
     </div>
+
+  
     </form>
 
 </div>
@@ -277,6 +290,28 @@
                                     <!-- /.modal -->
 
 @endsection @section('script')
-<script src="../assets/global/plugins/jquery-nestable/jquery.nestable.js" type="text/javascript"></script>
-<script src="../assets/pages/scripts/ui-nestable.js" type="text/javascript"></script>
+<script src="{{base_url('assets/global/plugins/jquery-nestable/jquery.nestable.js')}}" type="text/javascript"></script>
+<!-- <script src="{{base_url('assets/pages/scripts/ui-nestable.js')}}" type="text/javascript"></script> -->
+<script>
+$(document).ready(function () {
+    var updateOutput = function (e) {
+        var list = e.length ? e : $(e.target), output = list.data('output');
+
+        $.ajax({
+            method: "POST",
+            url: baseurl+"mt-admin/navigation/saveListdata",
+            data: {
+                list: list.nestable('serialize')
+            }
+        }).fail(function(jqXHR, textStatus, errorThrown){
+            alert("Unable to save new list order: " + errorThrown);
+        });
+    };
+
+    $('#nestable').nestable({
+        group: 1,
+        maxDepth: 7,
+    }).on('change', updateOutput);
+});
+</script>
 @endsection

@@ -112,12 +112,22 @@ public function add()
             'null' => TRUE,
         ),
     );
+
+
+    $menulist = array(
+        'menulist_name_'.$lang_code => array(
+            'type' => 'VARCHAR',
+            'constraint' => '250',
+            'null' => TRUE,
+    )
+    );
         
         $this->web->AddColumn(MENUS,$menus);    
         $this->web->AddColumn(LANGLABEL,$fields);
         $this->web->AddColumn(PAGE,$pages);
         $this->web->AddColumn(POSTS,$posts);
         $this->web->AddColumn(CATEGORY,$category);
+        $this->web->AddColumn(PAGEMENUSLIST,$menulist);
 
          if(!empty($save)){
          $this->session->set_tempdata('msg', $this->web->getLable('msg_save'), 3);    
@@ -226,11 +236,20 @@ public function edit($id)
         ),
         );
 
+        $menulist = array(
+            'menulist_name_'.$lang_code => array(
+                'type' => 'VARCHAR',
+                'constraint' => '250',
+                'null' => TRUE,
+        )
+        );
+
         $this->web->ModifyColumn(MENUS,$menus);
         $this->web->ModifyColumn(LANGLABEL,$fields);
         $this->web->ModifyColumn(PAGE,$pages);
         $this->web->ModifyColumn(POSTS,$posts);
         $this->web->ModifyColumn(CATEGORY,$category);
+        $this->web->ModifyColumn(PAGEMENUSLIST,$menulist);
 
          if(!empty($save)){
          $this->session->set_tempdata('msg', $this->web->getLable('msg_edit'), 3);    
@@ -280,6 +299,7 @@ public function action()
                  $this->dbforge->drop_column(POSTS, 'posts_slug_'.$lang_iso);
                  $this->dbforge->drop_column(CATEGORY, 'cat_name_'.$lang_iso);
                  $this->dbforge->drop_column(CATEGORY, 'cat_slug_'.$lang_iso);
+                 $this->dbforge->drop_column(PAGEMENUSLIST, 'menulist_name_'.$lang_iso);
                  $this->session->set_tempdata('msg', $this->web->getLable('msg_delete'), 3);     
                  }
 
@@ -311,6 +331,7 @@ public function delete($id)
          $this->dbforge->drop_column(POSTS, 'posts_slug_'.$lang_iso);
          $this->dbforge->drop_column(CATEGORY, 'cat_name_'.$lang_iso);
          $this->dbforge->drop_column(CATEGORY, 'cat_slug_'.$lang_iso);
+         $this->dbforge->drop_column(PAGEMENUSLIST, 'menulist_name_'.$lang_iso);
          $this->session->set_tempdata('msg', $this->web->getLable('msg_delete'), 3); 
    
     redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');     
