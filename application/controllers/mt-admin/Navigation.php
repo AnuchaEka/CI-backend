@@ -190,6 +190,14 @@ public function add()
      
       if($this->web->updateData(PAGEMENUS,$ins,array('page_menu_id'=>$menuid))){
 
+        if(sizeof($optionmenu)>0){
+            $this->web->updateData(PAGEMENUSOPTION,array('page_menu_id'=>0),array('page_menu_id'=>$menuid));
+            foreach ($optionmenu as $key => $value) {
+                $this->web->updateData(PAGEMENUSOPTION,array('page_menu_id'=>$value),array('menu_option_key'=>$key));
+            }
+        }
+           
+
          if(!empty($save)){
          $this->session->set_tempdata('msg', $this->web->getLable('msg_save'), 3);    
          redirect(base_url('mt-admin/'.$this->uri->segment(2)),'refresh');

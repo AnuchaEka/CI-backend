@@ -29,7 +29,6 @@
     </div>
     </form>
    
-    <form class="form-horizontal" action="" id="form_sample_1" method="post" enctype="multipart/form-data">
 
         <div class="col-md-4">
             <div class="portlet light">
@@ -53,11 +52,13 @@
                          @endforeach
                      </select>
                       </div>
+                      <form class="form-horizontal" action="" id="form_sample_1" method="post" enctype="multipart/form-data">
                         <div class="panel-heading accordionborder">
                             <h4 class="panel-title">
                             หน้า<a class="accordion-toggle pull-right" data-toggle="collapse" data-parent="#pages" href="#pages"><i class="fa fa-sort-down"></i></a>
                             </h4>
                         </div>
+                       
                             <div id="pages" class="panel-collapse collapse">
                             <div class="panel-body" >
                             <div class="portlet-title">
@@ -80,6 +81,11 @@
                             </div> 
                             </div>
                         </div>
+                        <input type="hidden" name="menuid" id="menuid" value="{{$res['page_menu_id']}}">
+                        </form>
+
+                        
+                        <form class="form-horizontal" action="" id="form_sample_1" method="post" enctype="multipart/form-data">
                         <div class="panel-heading accordionborder">
                             <h4 class="panel-title">
                             เรื่อง  <a class="accordion-toggle pull-right" data-toggle="collapse" data-parent="#posts" href="#posts"><i class="fa fa-sort-down"></i></a>
@@ -107,7 +113,10 @@
                         </div> 
                         </div>
                         </div>
+                        <input type="hidden" name="menuid" id="menuid" value="{{$res['page_menu_id']}}">
+                        </form>
 
+                        <form class="form-horizontal" action="" id="form_sample_1" method="post" enctype="multipart/form-data">
                         <div class="panel-heading accordionborder">
                             <h4 class="panel-title">
                             ปรับแต่งลิงก์  <a class="accordion-toggle pull-right" data-toggle="collapse" data-parent="#customlink" href="#customlink"><i class="fa fa-sort-down"></i></a>
@@ -146,7 +155,10 @@
                         </div> 
                         </div>
                         </div>
+                        <input type="hidden" name="menuid" id="menuid" value="{{$res['page_menu_id']}}">
+                        </form>
 
+                        <form class="form-horizontal" action="" id="form_sample_1" method="post" enctype="multipart/form-data">            
                         <div class="panel-heading accordionborder">
                             <h4 class="panel-title">
                             หมวดหมู่  <a class="accordion-toggle pull-right" data-toggle="collapse" data-parent="#category" href="#category"><i class="fa fa-sort-down"></i></a>
@@ -176,12 +188,14 @@
                             </div>
                               
                         </div>
+                        <input type="hidden" name="menuid" id="menuid" value="{{$res['page_menu_id']}}">
+                        </form>
 
 
                 </div>
                 
             </div>
-            <input type="hidden" name="menuid" id="menuid" value="{{$res['page_menu_id']}}">
+           
 
 
 
