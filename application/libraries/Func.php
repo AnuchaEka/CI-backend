@@ -85,6 +85,30 @@ class Func {
           }
   }
 
+  public function chekboxproduct($tree, $r = 0, $p = null,$parent=0) {
+    $CI =& get_instance();
+   
+    foreach ($tree as $i => $t) {
+        $dash = ($t['cat_parent'] == 0) ? '' : str_repeat(' ', $r) .' ';
+
+       $qr= $CI->db->where('product_id',$parent)->where('productmeta_value',$t['cat_id'])->get(PRODUCTMETA)->row();
+       //print_r($t['_children']);
+       //echo $parent;
+      if($t['cat_id']==$qr->productmeta_value){
+        echo "<label class='mt-checkbox mt-checkbox-outline' style='margin-left:".$r."em;margin-bottom:10px;'> ".$dash." ".$t['cat_name_'.$CI->session->userdata('configlang')]."<input type='checkbox' name='category[]' checked value='".$t['cat_id']."'><span></span></label><br>";
+      }else{
+        echo "<label class='mt-checkbox mt-checkbox-outline' style='margin-left:".$r."em;margin-bottom:10px;'> ".$dash." ".$t['cat_name_'.$CI->session->userdata('configlang')]."<input type='checkbox' name='category[]'  value='".$t['cat_id']."'><span></span></label><br>";
+      }
+       
+        
+        if (isset($t['_children'])) {
+          $this->chekboxproduct($t['_children'], $r+1.5, $t['cat_parent'],$parent); 
+         
+        }
+
+        }
+}
+
   public function printcattable($tree, $r = 0, $p = null,$parent=null) {
     $CI =& get_instance();
     foreach ($tree as $i => $t) {

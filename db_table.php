@@ -20,4 +20,7 @@ define('POSTMETA', 'mt_postmeta');
 define('PAGEMENUS', 'mt_page_menu');
 define('PAGEMENUSOPTION', 'mt_page_menuoption');
 define('PAGEMENUSLIST', 'mt_page_menulist');
+define('CATEGORYPRODUCT', 'mt_categoryproduct');
+define('PRODUCTMETA', 'mt_productmeta');
+define('PRODUCT', 'mt_product');
 ?>

@@ -113,6 +113,36 @@ public function add()
         ),
     );
 
+    $categoryproduct = array(
+        'cat_name_'.$lang_code => array(
+            'type' => 'VARCHAR',
+            'constraint' => '250',
+            'null' => TRUE,
+    ),
+       'cat_slug_'.$lang_code => array(
+        'type' => 'VARCHAR',
+        'constraint' => '250',
+        'null' => TRUE,
+    ),
+    );
+
+    $product = array(
+        'product_name_'.$lang_code => array(
+            'type' => 'VARCHAR',
+            'constraint' => '250',
+            'null' => TRUE,
+    ),
+        'product_content_'.$lang_code => array(
+            'type' => 'LONGTEXT',
+            'null' => TRUE,
+    ),
+        'product_slug_'.$lang_code => array(
+            'type' => 'VARCHAR',
+            'constraint' => '250',
+            'null' => TRUE,
+        ),
+    );
+
 
     $menulist = array(
         'menulist_name_'.$lang_code => array(
@@ -128,6 +158,8 @@ public function add()
         $this->web->AddColumn(POSTS,$posts);
         $this->web->AddColumn(CATEGORY,$category);
         $this->web->AddColumn(PAGEMENUSLIST,$menulist);
+        $this->web->AddColumn(PRODUCT,$product);
+        $this->web->AddColumn(CATEGORYPRODUCT,$categoryproduct);
 
          if(!empty($save)){
          $this->session->set_tempdata('msg', $this->web->getLable('msg_save'), 3);    
@@ -236,6 +268,36 @@ public function edit($id)
         ),
         );
 
+        $categoryproduct = array(
+            'cat_name_'.$lang_code => array(
+                'type' => 'VARCHAR',
+                'constraint' => '250',
+                'null' => TRUE,
+        ),
+           'cat_slug_'.$lang_code => array(
+            'type' => 'VARCHAR',
+            'constraint' => '250',
+            'null' => TRUE,
+        ),
+        );
+    
+        $product = array(
+            'product_name_'.$lang_code => array(
+                'type' => 'VARCHAR',
+                'constraint' => '250',
+                'null' => TRUE,
+        ),
+            'product_content_'.$lang_code => array(
+                'type' => 'LONGTEXT',
+                'null' => TRUE,
+        ),
+            'product_slug_'.$lang_code => array(
+                'type' => 'VARCHAR',
+                'constraint' => '250',
+                'null' => TRUE,
+            ),
+        );
+
         $menulist = array(
             'menulist_name_'.$lang_code => array(
                 'type' => 'VARCHAR',
@@ -250,6 +312,8 @@ public function edit($id)
         $this->web->ModifyColumn(POSTS,$posts);
         $this->web->ModifyColumn(CATEGORY,$category);
         $this->web->ModifyColumn(PAGEMENUSLIST,$menulist);
+        $this->web->ModifyColumn(PRODUCT,$product);
+        $this->web->ModifyColumn(CATEGORYPRODUCT,$categoryproduct);
 
          if(!empty($save)){
          $this->session->set_tempdata('msg', $this->web->getLable('msg_edit'), 3);    
@@ -300,6 +364,11 @@ public function action()
                  $this->dbforge->drop_column(CATEGORY, 'cat_name_'.$lang_iso);
                  $this->dbforge->drop_column(CATEGORY, 'cat_slug_'.$lang_iso);
                  $this->dbforge->drop_column(PAGEMENUSLIST, 'menulist_name_'.$lang_iso);
+                 $this->dbforge->drop_column(PRODUCT, 'product_name_'.$lang_iso);
+                 $this->dbforge->drop_column(PRODUCT, 'product_content_'.$lang_iso);
+                 $this->dbforge->drop_column(PRODUCT, 'product_slug_'.$lang_iso);
+                 $this->dbforge->drop_column(CATEGORYPRODUCT, 'cat_name_'.$lang_iso);
+                 $this->dbforge->drop_column(CATEGORYPRODUCT, 'cat_slug_'.$lang_iso);
                  $this->session->set_tempdata('msg', $this->web->getLable('msg_delete'), 3);     
                  }
 
@@ -331,6 +400,11 @@ public function delete($id)
          $this->dbforge->drop_column(POSTS, 'posts_slug_'.$lang_iso);
          $this->dbforge->drop_column(CATEGORY, 'cat_name_'.$lang_iso);
          $this->dbforge->drop_column(CATEGORY, 'cat_slug_'.$lang_iso);
+         $this->dbforge->drop_column(PRODUCT, 'product_name_'.$lang_iso);
+         $this->dbforge->drop_column(PRODUCT, 'product_content_'.$lang_iso);
+         $this->dbforge->drop_column(PRODUCT, 'product_slug_'.$lang_iso);
+         $this->dbforge->drop_column(CATEGORYPRODUCT, 'cat_name_'.$lang_iso);
+         $this->dbforge->drop_column(CATEGORYPRODUCT, 'cat_slug_'.$lang_iso);
          $this->dbforge->drop_column(PAGEMENUSLIST, 'menulist_name_'.$lang_iso);
          $this->session->set_tempdata('msg', $this->web->getLable('msg_delete'), 3); 
    
